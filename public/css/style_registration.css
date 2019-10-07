@@ -1,0 +1,58 @@
+/*registration.handlebars*/
+/*
+.main_registration{
+    background-image: url("/pictures/resort.jpg");
+    padding: 2em;
+    background-position: cover;
+} */
+.registration_fb,.registration_google {
+    text-decoration: none;
+    color:  #FF5A5F;
+}
+.registration_fb:hover, .registration_google:hover{
+    text-decoration: none;
+    color:  #FF5A5F;
+}
+.main_registration, .form_container{
+    margin-top:2em;
+    margin-bottom: 2em;
+    text-align: center;
+    font-family: sans-serif;
+}
+.birthday > select{
+    margin: 1em 1em;
+    width: 8em;
+}
+.birthday_word{
+    text-align: left;
+}
+div.form_container{
+    text-align: center;
+
+}
+form{
+    width: 40%;
+    margin: 0 auto;
+}
+form > input{
+    margin-top: 2em;
+    width: 15em;
+    height: 2em;
+    border-radius: 5%;
+    border-style:solid;
+
+}
+.or_registration{
+    margin: 2em 0;
+    font-size: 1.2em;
+}
+.btn_signup {
+    width: 12em;
+    height: 2aem;
+    font-size: 2em;
+    background-color: #FF5A5F;
+    margin: 1em 0;
+    color:white;
+    border-style: none;
+    border-radius: 2%;
+}

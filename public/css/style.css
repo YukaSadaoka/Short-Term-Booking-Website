@@ -1,0 +1,221 @@
+body{
+    font-family: sans-serif;
+}
+
+/*Header - main.handlebars*/
+header{
+    
+    margin: 0;
+    font-family: sans-serif;
+}
+.logo{
+    width: 30%;
+    height:30%;
+}
+.nav_link > a{
+    margin: 3em;
+    text-decoration: none;
+    color: black;
+}
+.nav_link > a:hover{
+    text-decoration: none;
+    color: black;
+}
+.header_container{
+    display: inline-block;
+}
+
+div.header_container{
+    width:20%;
+}
+nav.header_container{ 
+    width:70%;
+}
+/*Modal pop up*/
+.modal{
+    text-align: center;
+}
+
+.fb_signup{
+    background-color: #3c5a99;
+    border-style: none;
+    width: 50%;
+    height: 2em;
+    color: white;
+    font-size: 1.5em;
+}
+.google_signup{
+    border-style: solid;
+    border-color: black;
+    width: 50%;
+    height: 2em;
+    font-size: 1.5em;
+}
+.email_signup{
+    background-color: #FF5A5F;
+    border-style: solid;
+    width: 50%;
+    height: 2em;
+    color: white;
+    font-size: 1.5em;
+}
+.close_btn{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 1em;
+    color: darkgray;
+}
+.close_btn:hover{
+    border:none;
+}
+.footer_signup{
+   
+   display: none;
+}
+.footer_signup p{
+    margin: 1em;
+}
+
+/*home.handlebars*/
+.trip_plan{
+    font-family: sans-serif;
+    margin: 1em;
+    padding: 1em;
+    width: 28%;
+    text-align: left;
+    background-color: white;
+    border-radius: 10%;
+    padding: 0.5px;
+}
+.form_home{
+    margin:2em;
+    
+}
+.form_home > select{
+    margin: 0 ;
+}
+.form_home > label{
+    margin: 0;
+}
+.form_home > input{
+    margin: 0;
+}
+.btn_serch{
+    width: 6em;
+    padding:2px;
+    font-size: 1.3em;
+    background-color: #FF5A5F;
+    margin: 0.5em 0;
+    border-style: none;
+    border-radius: 5%;
+}
+.main_back{
+    padding: 3em;
+    margin-top:0;
+    background-image: url("/pictures/head_house.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 500px;  
+}
+
+/*recommended*/
+.rec_pic{
+    display: inline-block;
+    width: 30%;
+}
+div.rec_comment{
+  width:100%;
+}
+.plus{
+    width:230px;
+    width:270px;
+} 
+.plus_verify{
+    color: darkred;
+    font-weight: bold;
+}
+.rec_container{
+    padding: 3em 3em 3em 3.5em;
+   
+}
+.rec_container{
+    text-align: center;
+   
+}
+.rec_header{
+    text-align: unset;
+}
+.about_container{
+    /*background-image: url(/pictures/rome_about.jpg);*/
+    padding: 2em;
+    font-weight: 900px;
+    text-align: center;
+} 
+
+.about_container div{
+    width: 50%;
+}
+.about, .rec_header , room_header{
+    text-align: none;
+    font-weight: bold;
+}
+.about_container p{
+    line-height: 3em;
+}
+.about_p{
+    margin: 1em auto;
+}
+
+
+/*Footer*/
+
+footer{
+    float: none;
+    padding: 2em;
+    height: 50px;
+    text-align: center;
+}
+.icon {
+    width: inherit;
+    height: inherit;  
+    justify-content: center;
+    align-items: center;
+    margin: 3em 2em;
+}
+footer i{
+    font-size: 3em;
+    margin-bottom:1.5em;
+}
+
+.fb_icon{
+    color: #3c5a99;
+    
+}
+.fb_icon:hover{
+    color: #3c5a99;
+}
+.twitter_icon{
+  color: #38A1F3;
+  
+}
+
+.twitter_icon:hover{
+  color: #38A1F3;
+  
+}
+
+.youtube_icon{
+   color: #FF0000;
+}
+.insta_icon:hover{
+    color: #e1306c;
+}
+footer div a:hover{
+    text-decoration: none;
+    color:#FF5A5F
+}
+footer div a{
+    text-decoration: none;
+    color:  #FF5A5F
+} 
