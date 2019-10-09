@@ -3,31 +3,22 @@
     margin: 1.5em 1.5em 0.5em 1em;
 
 }
-
-.room_container .room_pic{
-    width:90%;
-    text-align: center;
-}  
-
+.plus_varify{
+    color: darkmagenta;
+}
 .room_container{
-    display: inline-block;
-    width:30%;
     padding: 1em 2.2em;
-    margin: 1.5em 1em 2.5em 1em;
+    margin:2em;
    
-}
-
-.room_comment{
-    font-weight: bolder;
-}
-.room_container > a{
+} 
+.room_container a{
     text-decoration: none;
     color: black;
 }
-.room_container > a:hover{
+.room_container  a:hover{
     text-decoration: none;
     color: black;
-}
+} 
 .fa-star {
     color:#00A699;
 
