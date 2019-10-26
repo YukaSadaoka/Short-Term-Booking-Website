@@ -12,16 +12,35 @@
 </head>
 <body>
     <header>
-        <div class='header_container'>
-            <a href="/"><img class="logo" src="pictures/airbnb_logo.jpg" alt="Airbnb logo"></a>
-        </div>
-        <nav class='header_container'>
-            <div class="nav_link">
-                <a href="/">Home</a>
-                <a data-toggle="modal" data-target="#myModal" href="#myModal">Sign up</a>
-                <a href="/roomlist">Room List</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="pictures/airbnb_logo.jpg"  width="30" height="30" class="d-inline-block align-top" alt="logo">
+                PerfectRoom
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="top_links" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="top_links" class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal" style="color:black">Sign up
+                        <span class="sr-only">(current)</span></a>
+                    </li>
+                        <li class="nav-item active">
+                        <a class="top_links" class="nav-link" href="/roomlist">Room List<span class="sr-only">(current)</span></a>
+                    </li>     
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="navi_search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="navi_btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
         </nav>
+
         <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
