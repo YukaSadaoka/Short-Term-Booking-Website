@@ -21,11 +21,13 @@
     text-align: center;
 }
 .register_input{
-    margin-top: 1em;
-    width: 15em;
-    height: 2.3em;
-    border-radius: 5%;
-    border-style:solid;
+    margin-top: 0.5em;
+    width: 16em;
+    height: 2.7em;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    padding: .375rem .75rem;
 }
 .registration_select{
     margin: 1em 1em;
@@ -34,11 +36,18 @@
 }
 .btn_signup {
     width: 10em;
-    height: 2aem;
-    font-size: 2em;
+    height: 1.5em;
+    font-size: 1.5em;
     background-color: #FF5A5F;
-    margin: 1em 0;
+    margin: 0.5em;
+    padding-bottom: .05em;
     color:white;
     border-style: none;
     border-radius: 2%;
 } 
+
+.registerError{
+    color: red;
+    line-height: 1em;
+    font-size: 1.3em;
+}

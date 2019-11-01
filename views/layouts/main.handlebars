@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/style_roomList.css">
     <link rel="stylesheet" href="./css/style_registration.css">
+    <link rel="stylesheet" href="./css/style_login.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
 </head>
@@ -14,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
-                <img src="pictures/airbnb_logo.jpg"  width="30" height="30" class="d-inline-block align-top" alt="logo">
+                <i class="fas fa-door-open"></i>
                 PerfectRoom
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +31,10 @@
                         <a class="top_links" class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal" style="color:black">Sign up
                         <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="top_links" class="nav-link" href="/login">Log In<span class="sr-only">(current)</span></a>
+                    </li>      
+                    </li>
                         <li class="nav-item active">
                         <a class="top_links" class="nav-link" href="/roomlist">Room List<span class="sr-only">(current)</span></a>
                     </li>     
@@ -41,22 +46,42 @@
             </div>
         </nav>
 
-        <div class="modal fade" id="myModal">
+        <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <input type="button" class="close_btn" data-dismiss="modal" value="x" >
                     </div>
                     <div class="modal-body" class="modal">
-                        <div>
-                            <button type="button" class="fb_signup" class="btn btn-fb"><i class="fab fa-facebook-f pr-1"></i> Facebook</button><br><br>
-                            <button type="button" class="google_signup" class="btn btn-gplus"><i class="fab fa-google-plus-g pr-1"></i> Google +</button><br><br>
+                        <div class="modal_buttons">
+                            <button type="button" class="fb_signup" class="btn btn-fb">
+                                <div class="flex_signin">
+                                    <div  class="flex_signin_item"><i class="fab fa-facebook-f pr-1"></i> </div>
+                                    <div class="flex_signin_item">Facebook</div>
+                                </div>
+                            </button><br><br>
+                            
+                            <button type="button" class="google_signup" class="btn btn-gplus">
+                                <div class="flex_signin">
+                                    <div  class="flex_signin_item"><i class="fab fa-google-plus-g pr-1"></i></div>
+                                    <div class="flex_signin_item">Google</div>
+                                </div>
+                            </button><br><br>
                             <p id="or">or</p>
-                            <button type="button" class="email_signup" class="btn btn-email"><i class="fas fa-envelope pr-1"></i> Email</button><br><br>                                   
+                            
+                            <button type="button" class="email_signup" class="btn btn-email">
+                                <a class="signup_btn_link" href="/registration">
+                                <div class="flex_signin">
+                                    <div  class="flex_signin_item"><i class="fas fa-envelope pr-1"></i></div>
+                                    <div class="flex_signin_item">Email</div>
+                                </div>
+                                </a>
+                            </button>
+                            </a><br><br>                                                              
                         </div>
                     </div>
                     <div class="modal-footer" class="footer_signup">
-                        <p>Already have an Airbnb account? <a href="#">Log in</a></p>
+                        <p>Already have an Airbnb account? <a href="/login">Log in</a></p>
                     </div>
                 </div>
             </div>

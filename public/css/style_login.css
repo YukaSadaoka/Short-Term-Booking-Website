@@ -1,0 +1,45 @@
+/*
+ #FF5A5F
+*/
+
+/* login.handlebars style*/
+
+.login_text_centre{
+    text-align: center !important;
+    display: flex;
+    padding: 3em;
+}
+
+.form_login{
+    width: 100%;
+    max-width: 330px;
+    padding: 10px;
+    margin: auto;
+}
+.login_check{
+    margin: 1em;
+}
+.login_btn{
+
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    width: 100%;
+    color: white;
+    background-color:  #FF5A5F;
+    border-color: #FF5A5F;
+    border: 1px solid transparent;
+    margin-bottom: 1em;
+}
+
+.link_signup_login{
+    margin-left: 1em;
+}
+
+.login_error{
+    margin-top: 1em;
+    color: red;
+    font-size: 1.3em;
+    line-height: 1em;
+}

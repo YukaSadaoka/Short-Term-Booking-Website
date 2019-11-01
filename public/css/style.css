@@ -29,7 +29,7 @@ header{
     width: 10em;
     margin: 0.5em;
     border-radius: 5%;
-    border-style:solid;
+    border-style:none;
 }
 .top_links{
     margin: 3em;
@@ -53,34 +53,50 @@ nav.header_container{
 .home_search{
     margin-top: 0;
 }
+
+
 /*Modal pop up*/
+
 .modal{
     text-align: center;
+}
+.modal_buttons > button{
+    border: 1px solid transparent;
+    border-radius: 3px;
+    width: 70%;
+    height: 2em;
+    font-size: 1.5em;
+}
+.flex_signin{
+    display:flex !important;
+    justify-content: center;
+}
+.felx_signin_item{
+    display: inline-flex !important;
 }
 
 .fb_signup{
     background-color: #3c5a99;
-    border-style: none;
-    width: 50%;
-    height: 2em;
     color: white;
-    font-size: 1.5em;
 }
 .google_signup{
-    border-style: solid;
-    border-color: black;
-    width: 50%;
-    height: 2em;
-    font-size: 1.5em;
+    border: 3px solid black !important;
 }
 .email_signup{
-    background-color: #FF5A5F;
-    border-style: solid;
-    width: 50%;
-    height: 2em;
+    background-color: #FF5A5F;   
     color: white;
-    font-size: 1.5em;
 }
+
+.signup_btn_link{
+    text-decoration: none;
+    color: white;
+}
+
+.signup_btn_link:hover{
+    text-decoration: none;
+    color: white;
+}
+
 .close_btn{
     border: none;
     background-color: transparent;
@@ -100,16 +116,6 @@ nav.header_container{
 }
 
 /*home.handlebars*/
-/* .trip_plan{
-    font-family: sans-serif;
-    margin: 1em;
-    padding: 1em;
-    width: 28%;
-    text-align: left;
-    background-color: white;
-    border-radius: 10%;
-    padding: 0.5px;
-} */
 
 .btn_serch{
     width: 6em;
@@ -125,14 +131,16 @@ nav.header_container{
     margin-top:0;
     background-image: url("/pictures/head_house.jpg");
     background-size: cover;
-    width: 100%;
-    height: 500px;  
+    height: 100vh !important;
+    min-height: 680px !important;
+    max-height: 1500px !important; 
 }
-.form_container{
+.home_form_container{
     text-align: centre;
     padding: 2em;
     background-color: white;
     border-radius: 5%;
+    max-width:500px;
 }
 
 
@@ -153,14 +161,24 @@ div.rec_comment{
     color: darkred;
     font-weight: bold;
 }
+
+.adjust{
+    width:100%;
+    height: 100%;
+}
 .rec_container{
+
+    min-height: 680px !important;
+    max-height: 1500px !important; 
+    max-width: 1500px;
     margin-top: 3em;
     padding: 3em 3em 3em 3.5em;
     text-align: center;
 }
-.rec_header{
-    margin-top: 2em;
-    text-align: unset;
+
+.top_recommended{
+    display:flex;
+    flex-direction: column;
 }
 .about_container{
     /*background-image: url(/pictures/rome_about.jpg);*/
@@ -181,6 +199,13 @@ div.rec_comment{
 }
 .about_p{
     margin: 1em auto;
+}
+
+/*Home contents*/
+.home_contents{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4em ;
 }
 
 

@@ -1,21 +1,21 @@
-
 <main class="main_registration">
     <div class="card" class="registration_container" style="border-bottom: none">
         <h3 class="otherOption">Sign up with <a href="#" class="registration_fb">Facebook</a> or <a href="#" class="registration_google">Google</a></h3>
         <p class="otherOption">or</p>
-        <form class="registration_form">
+        <form method="POST" action="/registration" class="registration_form">
             <div class="form-group">
-                <input class="register_input" type="text" placeholder="Email address" ><br><br>
-                <input class="register_input" type="text" placeholder="First name" ><br><br>
-                <input class="register_input" type="text" placeholder="Last name" ><br><br>
-                <input class="register_input" type="text" placeholder="Create a Password" ><br><br>
+                <input class="register_input" type="username" name="username" placeholder="User Name" autofocus ><br><br>
+                <input class="register_input" type="email" name="email" placeholder="Email address" autofocus ><br><br>
+                <input class="register_input" type="text" name="firstname" placeholder="First name" autofocus ><br><br>
+                <input class="register_input" type="text" name="lastname" placeholder="Last name" autofocus><br><br>
+                <input class="register_input" type="text" name="password" placeholder="Create a Password" autofocus><br><br>
             </div>
             <div class="form-group">
                 <h3 class="birthday_word">Birthday</h3>
                 <p class="birthday_word">To sign up, you need to be at least 18. 
-                    Other people who use Airbnb won't see your birthday
+                    Other people who use PerfectRoom won't see your birthday
                 </p>
-                <select class="registration_select">
+                <select class="registration_select" name="bday_month">
                     <option value="Month">Month</option>
                     <option value="January">January</option>
                     <option value="Feburary">Feburary</option>
@@ -30,7 +30,7 @@
                     <option value="November">November</option>
                     <option value="December">December</option>
                 </select>
-                <select class="registration_select">
+                <select class="registration_select" name="bday_day">
                     <option = value="Day">Day</option>
                     <option = value="1">1</option>
                     <option = value="2">2</option>
@@ -64,7 +64,7 @@
                     <option = value="30">30</option>
                     <option = value="31">31</option>
                 </select>
-                <select class="registration_select">
+                <select class="registration_select" name="bday_year">
                     <option value="Year">Year</option>
                     <option value="2001">2001</option>
                     <option value="2000">2000</option>
@@ -84,7 +84,14 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">I agree on <a href="#">the terms and condition</a></label>
             </div>
-            <input type="button" value="Sign up" class="btn_signup">
+
+            <div>
+                {{#each error}}
+                    <div class="registerError">{{this}}</div>
+                {{/each}}
+            </div>
+
+            <input type="submit" value="Sign up" class="btn_signup">
         </form>
     </div>
 </main>
