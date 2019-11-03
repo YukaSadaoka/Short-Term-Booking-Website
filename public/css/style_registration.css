@@ -29,11 +29,11 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     padding: .375rem .75rem;
 }
-.registration_select{
+/* .registration_select{
     margin: 1em 1em;
     width: 8em;
     height: 2.3em;
-}
+} */
 .btn_signup {
     width: 10em;
     height: 1.5em;
@@ -48,6 +48,6 @@
 
 .registerError{
     color: red;
-    line-height: 1em;
-    font-size: 0.6em;
+    line-height: 1.2em;
+    font-size: 1.2em;
 }

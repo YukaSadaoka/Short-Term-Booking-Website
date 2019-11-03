@@ -18,7 +18,7 @@ router.get("/registration", (req, res)=>{
 
 router.post("/registration", (req,res)=>
 {
-
+   
 
     const newUser =
     {
@@ -26,8 +26,10 @@ router.post("/registration", (req,res)=>
         email: req.body.email,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-        password: req.body.password
+        password: req.body.password,
+        birthday: req.body.bday
     }
+
 
     let errMessage = [];
 
@@ -65,11 +67,15 @@ router.post("/registration", (req,res)=>
         errMessage.push("Password must be longer than 8 characters, contain at least one symbol(! $ # @ _) and one uppercase character");
     }
 
+    if(req.body.bday==""){
+        errMessage.push("Please enter birthday");
+    }
+
 
     if(errMessage.length > 0){
 
         //Views/registration
-        res.render("/signup/registration",{
+        res.render("registration",{
           error:errMessage
         });
     }
@@ -81,21 +87,22 @@ router.post("/registration", (req,res)=>
 
         const options = {
             auth:{
-                api_key: "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"
+                api_key: "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"
             }
         }
 
         const mailer = nodemailer.createTransport(sgTransport(options));
 
         const email = {
-            to: '${req.body.email}',
-            from: 'yukasadaoka@outlook.com',
+            to: req.body.email,
+            from: 'gub.fad.617@gmail.com',
             subject: 'Welcome to PerfectRoom',
-            text: 'Hi ${req.body.firstname}! Your information has been registered in our system',
-            html: 'Hi ${req.body.firstname}! Your information has been registered in our system'
+            text: 'Hi ' + req.body.firstname + '! Your information has been registered in our system',
+            html: 'Hi ' + req.body.firstname +  '! Your information has been registered in our system'
         };
 
-        mailer.sendMail(email,(err,res)=>{
+       
+        mailer.sendMail(email, (err,res)=>{
             if(err){
                 console.log("Error ocurrs while sending email: ${err}");
             }
@@ -111,11 +118,14 @@ router.post("/registration", (req,res)=>
             res.redirect("/signup/dashboard");
 
         })
-        .catch(err=>console.log("Error: &{err}"));
+        .catch(err=>console.log("Error: "+ err));
     }
 });
 
+router.get("/dashboard",(req,res)=>{
 
+    res.render("userDashboard");
+});
 
 
 

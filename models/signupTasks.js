@@ -27,7 +27,12 @@ const signup = new Schema({
         type:String,
         required:true
     },
-    dateCreated:
+    birthday:
+    {
+        type:String,
+        required:true
+    },
+    datecreated:
     {
         type:Date,
         default:Date.now()

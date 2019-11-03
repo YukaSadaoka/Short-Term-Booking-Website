@@ -163,6 +163,7 @@ div.rec_comment{
 }
 
 .adjust{
+    margin-top: 110px;
     width:100%;
     height: 100%;
 }
@@ -188,7 +189,7 @@ div.rec_comment{
 } 
 
 .about_container div{
-    width: 50%;
+    min-width: 50%;
 }
 .about, .rec_header , room_header{
     text-align: none;
@@ -205,7 +206,7 @@ div.rec_comment{
 .home_contents{
     display: flex;
     flex-wrap: wrap;
-    margin: 4em ;
+    margin: 4em;
 }
 
 

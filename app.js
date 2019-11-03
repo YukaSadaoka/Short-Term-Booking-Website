@@ -47,11 +47,6 @@ app.get("/login", (req,res)=>{
 });
 
 
-app.get("/dashboard",(req,res)=>{
-
-    res.render("userDashboard");
-});
-
 
 app.post("/login", (req,res)=>{
 
