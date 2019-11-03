@@ -1,0 +1,72 @@
+/*userDashboard.handlebars*/
+
+.dashboard_nav_link{
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+.dashboard_nav_link:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.upcoming_container{
+
+    margin: 1.5em;
+}
+
+.upcoming_title{
+    margin: 1em;
+}
+
+.upcoming_dashboard{
+    
+    border-radius: 2%;
+    border: 0.2px solid gainsboro;
+    display: flex;
+    flex-direction: row; 
+    flex-grow: 1;
+    align-items: baseline;
+    justify-content: space-around;
+}
+.upcoming_pic{
+    height: 200px;
+}
+
+.flex_item_upcoming{
+    padding: 0.5em;
+}
+
+.upcoming_link:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.upcoming_link{
+    text-decoration: none;
+    color: black;
+}
+
+.referEmail{
+    width: 400px;
+    height: 40px;
+    padding-left: 0.5em;
+    border: 0.5px solid gainsboro; 
+    border-radius: 3px;
+    margin-left: 20px;
+}
+.refer_container{
+    padding-left: 30px;
+}
+.refer_container p{
+    margin-left: 20px;
+}
+
+.refer_link{
+    margin: 10px 22px ;
+}
