@@ -61,7 +61,7 @@ router.post("/registration", (req,res)=>
     const reg3 = /.*[!$#@_].*/;
 
     if(password==""){
-        errMessage.push("please enter Password");
+        errMessage.push("Please enter password");
     }else if(!(reg1.test(password))|| !(reg2.test(password)) || !(reg3.test(password))){
 
         errMessage.push("Password must be longer than 8 characters, contain at least one symbol(! $ # @ _) and one uppercase character");
