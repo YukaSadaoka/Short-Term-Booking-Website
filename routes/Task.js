@@ -95,10 +95,12 @@ router.post("/registration", (req,res)=>
 
         const email = {
             to: req.body.email,
-            from: 'gub.fad.617@gmail.com',
+            from: keys.myemail,
             subject: 'Welcome to PerfectRoom',
-            text: 'Hi ' + req.body.firstname + '! Your information has been registered in our system',
-            html: 'Hi ' + req.body.firstname +  '! Your information has been registered in our system'
+            text: 'Hi ' + req.body.firstname + '! Welcome to PerfectRoom!' + '<br>' + 'Your information has been registered in our system'
+            + '<br>' + 'Your username: ' + req.body.username  + '<br>',
+            html: 'Hi ' + req.body.firstname + '! Welcome to PerfectRoom!' + '<br>' + 'Your information has been registered in our system'
+            + '<br>' + 'Your username: ' + req.body.username  + '<br>',
         };
 
        
