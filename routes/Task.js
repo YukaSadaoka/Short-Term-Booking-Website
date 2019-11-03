@@ -2,7 +2,7 @@ const express = require("express");
 const parser = require("body-parser");
 const router = express.Router();
 const Task = require("../models/signupTasks");
-
+const keys = require("../config/keys");
 
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
@@ -87,7 +87,7 @@ router.post("/registration", (req,res)=>
 
         const options = {
             auth:{
-                api_key: "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"
+                api_key: keys.sendGrid_key
             }
         }
 

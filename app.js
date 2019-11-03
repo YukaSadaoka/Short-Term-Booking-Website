@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const parser = require("body-parser"); 
 const mongoose = require("mongoose");
-
+const keys = require("./config/keys");
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.use(parser.urlencoded({extended: false}));
 
 
 
-URL = 'mongodb+srv://yuka-sadaoka:yukaweb322A3@cluster0-xl7li.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(URL, {userNewUrlParser: true}) 
+//keys.getMongoURL(),
+mongoose.connect(keys.mongoURL, {userNewUrlParser: true}) 
 .then(()=>{
     console.log("Successfully connected to MongoDB");
 })
