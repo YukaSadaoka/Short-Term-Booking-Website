@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 require("dotenv").config( {path: "./config/vars.env"});
 
-const keys = require("./config/keys");
 
 
 
