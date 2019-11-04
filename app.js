@@ -2,7 +2,12 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const parser = require("body-parser"); 
 const mongoose = require("mongoose");
+const path = require("path");
+require("dotenv").config( {path: "./config/vars.env"});
+
 const keys = require("./config/keys");
+
+
 
 const app = express();
 
@@ -21,12 +26,12 @@ app.use(parser.urlencoded({extended: false}));
 
 
 //keys.getMongoURL(),
-mongoose.connect(keys.mongoURL, {userNewUrlParser: true}) 
+mongoose.connect(process.env.DATABASE_URL, {userNewUrlParser: true}) 
 .then(()=>{
     console.log("Successfully connected to MongoDB");
 })
 .catch((err)=>{
-    console.log('Something occured: ${err}');
+    console.log(`Something occured: ${err}`);
 })
 
 
@@ -69,8 +74,8 @@ app.post("/login", (req,res)=>{
 
 });
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 app.listen(PORT,()=>{
-    console.log("connecting");
+    console.log(`connecting ${PORT}`);
 })

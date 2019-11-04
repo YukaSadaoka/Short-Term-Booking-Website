@@ -4,6 +4,7 @@ const router = express.Router();
 const Task = require("../models/signupTasks");
 const keys = require("../config/keys");
 
+
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
 
@@ -87,7 +88,7 @@ router.post("/registration", (req,res)=>
 
         const options = {
             auth:{
-                api_key: keys.sendGrid_key
+                api_key: process.env.SENDGRID_API
             }
         }
 
@@ -95,7 +96,7 @@ router.post("/registration", (req,res)=>
 
         const email = {
             to: req.body.email,
-            from: keys.myemail,
+            from: process.env.MYEMAIL,
             subject: 'Welcome to PerfectRoom',
             text: 'Hi ' + req.body.firstname + '! Welcome to PerfectRoom!' + '<br>' + 'Your information has been registered in our system'
             + '<br>' + 'Your username: ' + req.body.username  + '<br>',
