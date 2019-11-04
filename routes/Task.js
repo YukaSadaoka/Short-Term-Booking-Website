@@ -2,7 +2,6 @@ const express = require("express");
 const parser = require("body-parser");
 const router = express.Router();
 const Task = require("../models/signupTasks");
-const keys = require("../config/keys");
 
 
 router.use(parser.urlencoded({ extended: false }));

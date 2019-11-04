@@ -6,8 +6,6 @@ const path = require("path");
 require("dotenv").config( {path: "./config/vars.env"});
 
 
-
-
 const app = express();
 
 const signupRoutes = require("./routes/Task");
