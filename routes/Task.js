@@ -32,8 +32,7 @@ router.post("/registration", (req,res)=>
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: req.body.password,
-        birthday: req.body.bday,
-        day: req.body.bdayDay
+        birthday: req.body.bday
     }
 
     console.log('New USER: ', newUser);
@@ -86,8 +85,6 @@ router.post("/registration", (req,res)=>
         res.render("registration",{
           error:errMessage,
 
-          username: req.body.username,
-          err: err
         });
     }
     else{

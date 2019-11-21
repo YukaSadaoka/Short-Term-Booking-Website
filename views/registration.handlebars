@@ -5,16 +5,7 @@
       
         <form method="POST" action="/signup/registration" class="registration_form">
             <div class="form-group">
-                <label for="validationServer03">Username</label>
-                <input type="text" class="form-control {{#if err.username}}is-invalid{{/if}}" id="validationServer03" placeholder="Username">
-                {{#if err.username}}
-                <div class="invalid-feedback">
-                    {{err.username}}
-                </div>
-                {{/if}}
-            </div>
-            <div class="form-group">
-                <input value="{{username}}" class="register_input" type="username" name="username" placeholder="User Name" autofocus ><br><br>             
+                <input class="register_input" type="username" name="username" placeholder="User Name" autofocus ><br><br>             
                 <input class="register_input" type="email" name="email" placeholder="Email address"><br><br>
                 <input class="register_input" type="text" name="firstname" placeholder="First name"><br><br>
                 <input class="register_input" type="text" name="lastname" placeholder="Last name"><br><br>
