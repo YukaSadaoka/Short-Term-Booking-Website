@@ -1,5 +1,6 @@
 const express = require("express");
 const parser = require("body-parser");
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const Task = require("../models/signupTasks");
 
@@ -77,7 +78,7 @@ router.post("/registration", (req,res)=>
     }else if(!(reg1.test(password1))|| !(reg2.test(password1)) || !(reg3.test(password1))){
         err.password.push("Password must be longer than 8 characters, contain at least one symbol(! $ # @ _) and one uppercase character");
         counter++;
-    }else if(password1 === password2){
+    }else if(password1 !== password2){
         err.password.push("Password must match");
         counter++;
     }
@@ -95,10 +96,11 @@ router.post("/registration", (req,res)=>
             console.log(`ERROR res: ${result}`);
             //console.log(`ERROR res: ${err.username}`);
 
-            if(result){
+            if(result != null){
                 err.username.push("This Username already exists!");
 
-            }          
+            }
+
             res.render("registration",{
                 err: err,
                 username: req.body.username,
@@ -117,13 +119,16 @@ router.post("/registration", (req,res)=>
     }
     else{
 
+        let hash = bcrypt.hashSync(req.body.password1, 10);
+        console.log(hash);
+
         const newUser =
         {
             username: req.body.username,
             email: req.body.email,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
-            password: req.body.password1,
+            password: hash,
             birthday: req.body.bday
         }
 
