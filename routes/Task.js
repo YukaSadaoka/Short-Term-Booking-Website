@@ -18,77 +18,114 @@ router.get("/registration", (req, res)=>{
 
 router.post("/registration", (req,res)=>
 {
-   
-    console.log('Test: '+ req.body.bdayDay);
+    let err = {username: [], email: [], firstname:[],lastname: [],password:[], birthday:[]};
+    let counter = 0;
 
-    const err = { 
-        username: []
-    };
+    
 
-    const newUser =
-    {
-        username: req.body.username,
-        email: req.body.email,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        password: req.body.password,
-        birthday: req.body.bday
-    }
+    // .then(function(result) {
+    //     if(result){
+    //         error.push("This Username already exists!");
+    //         counter++;
+    //     }
+        
+    // })
+    // .catch(err=>{
+    //     console.log(`Checking username caused an error: ${err}`);
+    // });
 
-    console.log('New USER: ', newUser);
-
-
-    let errMessage = [];
+   // console.log(`ERROR username: ${err.username}`);
 
     const user = req.body.username;
     const userReg1 = /^[A-Z][A-Za-z0-9!$#@_]{1,}/;
     const userReg2 = /.*[0-9].*/;
+    //console.log(`return?? : ${result}`);
 
-    if(user==""){
+     if(user==""){
         err.username.push("Please enter username");
+        counter++;
     }else if(!(userReg1.test(user)) || !(userReg2.test(user))){
         err.username.push("Username must start with uppercase letter, contain at least one number and can contain symbol(! $ # @ _)");
+        counter++;
     }
-
+        
+    
     if(req.body.email==""){
-        errMessage.push("Please enter email");
+        err.email.push("Please enter email");
+        counter++;
     }
 
     if(req.body.firstname==""){
-        errMessage.push("Please enter first name");
+        err.firstname.push("Please enter first name");
+        counter++;
     }
 
     if(req.body.lastname==""){
-        errMessage.push("Please enter last name");
+        err.lastname.push("Please enter last name");
+        counter++;
     }
 
-    const password = req.body.password;
+    const password1 = req.body.password1;
+    const password2 = req.body.password2;
     const reg1 = /^[A-Za-z0-9!$#@_]{8,}/;
     const reg2 = /.*[A-Z].*/;
     const reg3 = /.*[!$#@_].*/;
 
-    if(password==""){
-        errMessage.push("Please enter password");
-    }else if(!(reg1.test(password))|| !(reg2.test(password)) || !(reg3.test(password))){
-
-        errMessage.push("Password must be longer than 8 characters, contain at least one symbol(! $ # @ _) and one uppercase character");
+    if(password1 == "" || password2 == ""){
+        err.password.push("Please enter password");
+        counter++;
+    }else if(!(reg1.test(password1))|| !(reg2.test(password1)) || !(reg3.test(password1))){
+        err.password.push("Password must be longer than 8 characters, contain at least one symbol(! $ # @ _) and one uppercase character");
+        counter++;
+    }else if(password1 === password2){
+        err.password.push("Password must match");
+        counter++;
     }
 
     if(req.body.bday==""){
-        errMessage.push("Please enter birthday");
+        err.birthday.push("Please enter birthday");
+        counter++;
     }
+    
 
+    if(counter > 0){
 
-    if(errMessage.length > 0){
+        Task.findOne({username:req.body.username})
+        .then(result =>{
+            console.log(`ERROR res: ${result}`);
+            //console.log(`ERROR res: ${err.username}`);
 
-        //Views/registration
-        res.render("registration",{
-          error:errMessage,
+            if(result){
+                err.username.push("This Username already exists!");
 
+            }          
+            res.render("registration",{
+                err: err,
+                username: req.body.username,
+                email: req.body.email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                password: req.body.password1,
+                birthday: req.body.bday
+            });     
+
+        })
+        .catch(err=>{
+            console.log(`counter is ${err}`);
         });
+
     }
     else{
 
+        const newUser =
+        {
+            username: req.body.username,
+            email: req.body.email,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            password: req.body.password1,
+            birthday: req.body.bday
+        }
 
         const nodemailer = require("nodemailer");
         const sgTransport = require("nodemailer-sendgrid-transport");

@@ -5,30 +5,66 @@
       
         <form method="POST" action="/signup/registration" class="registration_form">
             <div class="form-group">
-                <input class="register_input" type="username" name="username" placeholder="User Name" autofocus ><br><br>             
-                <input class="register_input" type="email" name="email" placeholder="Email address"><br><br>
-                <input class="register_input" type="text" name="firstname" placeholder="First name"><br><br>
-                <input class="register_input" type="text" name="lastname" placeholder="Last name"><br><br>
-                <input class="register_input" type="text" name="password" placeholder="Create a Password"><br><br>
+                <div class="form-group">
+                    <input class="register_input" value="{{username}}" class="form-control {{#if err.username}}is-invalid{{/if}}" type="text" name="username" placeholder="User Name">      
+                    <div>
+                        {{#each err.username}}
+                            <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="register_input" class="form-control {{#if err.email}}is-invalid{{/if}}" value="{{email}}" type="email" name="email" placeholder="Email Address">
+                    <div>
+                        {{#each err.email}}
+                            <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="register_input" class="form-control {{#if err.firstname}}is-invalid{{/if}}" value="{{firstname}}" type="text" name="firstname" placeholder="First Name">
+                    <div>
+                        {{#each err.firstname}}
+                            <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="register_input" class="form-control {{#if err.lastname}}is-invalid{{/if}}" value="{{lastname}}" type="text" name="lastname" placeholder="Last Name">
+                    <div>
+                        {{#each err.lastname}}
+                            <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                <input class="register_input" type="text" name="password1" value="{{password}}" placeholder="Create Password"><br><br>
+                <input class="register_input" class="form-control {{#if err.password}}is-invalid{{/if}}" type="text" name="password2" placeholder="Confirm Password">
+               <div class="form-group">
+                    {{#each err.password}}
+                        <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                    {{/each}}
+                </div>
+
             </div>
             <div class="form-group">
                 <h3 class="birthday_word">Birthday</h3>
                 <p class="birthday_word">To sign up, you need to be at least 18. 
-                    Other people who use PerfectRoom won't see your birthday
+                    Other people who use PerfectRoom won't see your birthday.
                 </p>
-                <input class="register_input" type="text" name="bday" placeholder="Enter birthday (MM-DD-YYYY)" autofocus><br><br>
+                <div class="form-group">
+                    <input class="register_input" class="form-control {{#if err.birthday}}is-invalid{{/if}}" type="text" value="{{birthday}}" name="bday" placeholder="Enter birthday (MM-DD-YYYY)">  
+                    <div>
+                        {{#each err.birthday}}
+                            <div class="invalid-feedback" style="margin: 1em; display:block;">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">I agree on <a href="#">the terms and condition</a></label>
             </div>
-
-            <div>
-                {{#each error}}
-                    <div class="registerError">{{this}}</div>
-                {{/each}}
-            </div>
-
             <input type="submit" value="Sign up" class="btn_signup">
         </form>
     </div>
