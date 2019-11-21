@@ -19,6 +19,11 @@ router.get("/registration", (req, res)=>{
 router.post("/registration", (req,res)=>
 {
    
+    console.log('Test: '+ req.body.bdayDay);
+
+    const err = { 
+        username: []
+    };
 
     const newUser =
     {
@@ -27,8 +32,11 @@ router.post("/registration", (req,res)=>
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: req.body.password,
-        birthday: req.body.bday
+        birthday: req.body.bday,
+        day: req.body.bdayDay
     }
+
+    console.log('New USER: ', newUser);
 
 
     let errMessage = [];
@@ -38,9 +46,9 @@ router.post("/registration", (req,res)=>
     const userReg2 = /.*[0-9].*/;
 
     if(user==""){
-        errMessage.push("Please enter username");
+        err.username.push("Please enter username");
     }else if(!(userReg1.test(user)) || !(userReg2.test(user))){
-        errMessage.push("Username must start with uppercase letter, contain at least one number and can contain symbol(! $ # @ _)");
+        err.username.push("Username must start with uppercase letter, contain at least one number and can contain symbol(! $ # @ _)");
     }
 
     if(req.body.email==""){
@@ -76,7 +84,10 @@ router.post("/registration", (req,res)=>
 
         //Views/registration
         res.render("registration",{
-          error:errMessage
+          error:errMessage,
+
+          username: req.body.username,
+          err: err
         });
     }
     else{
