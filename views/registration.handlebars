@@ -39,7 +39,7 @@
                 </div>
                 <input class="register_input" type="text" name="password1" value="{{password}}" placeholder="Create Password"><br><br>
                 <input class="register_input" class="form-control {{#if err.password}}is-invalid{{/if}}" type="text" name="password2" placeholder="Confirm Password">
-               <div class="form-group">
+                <div class="form-group">
                     {{#each err.password}}
                         <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
                     {{/each}}

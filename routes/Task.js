@@ -21,22 +21,7 @@ router.post("/registration", (req,res)=>
 {
     let err = {username: [], email: [], firstname:[],lastname: [],password:[], birthday:[]};
     let counter = 0;
-
     
-
-    // .then(function(result) {
-    //     if(result){
-    //         error.push("This Username already exists!");
-    //         counter++;
-    //     }
-        
-    // })
-    // .catch(err=>{
-    //     console.log(`Checking username caused an error: ${err}`);
-    // });
-
-   // console.log(`ERROR username: ${err.username}`);
-
     const user = req.body.username;
     const userReg1 = /^[A-Z][A-Za-z0-9!$#@_]{1,}/;
     const userReg2 = /.*[0-9].*/;
@@ -87,10 +72,8 @@ router.post("/registration", (req,res)=>
         err.birthday.push("Please enter birthday");
         counter++;
     }
-    
 
     if(counter > 0){
-
         Task.findOne({username:req.body.username})
         .then(result =>{
             console.log(`ERROR res: ${result}`);
@@ -98,9 +81,7 @@ router.post("/registration", (req,res)=>
 
             if(result != null){
                 err.username.push("This Username already exists!");
-
             }
-
             res.render("registration",{
                 err: err,
                 username: req.body.username,
@@ -110,16 +91,14 @@ router.post("/registration", (req,res)=>
                 password: req.body.password1,
                 birthday: req.body.bday
             });     
-
         })
         .catch(err=>{
             console.log(`counter is ${err}`);
         });
-
     }
     else{
-
-        let hash = bcrypt.hashSync(req.body.password1, 10);
+        let salt = bcrypt.genSaltSync(10);
+        let hash = bcrypt.hash(req.body.password1, salt);
         console.log(hash);
 
         const newUser =
