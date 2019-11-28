@@ -2,6 +2,8 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const parser = require("body-parser"); 
 const mongoose = require("mongoose");
+const fileupload = require("express-fileupload");
+const session = require("express-session");
 const path = require("path");
 require("dotenv").config( {path: "./config/vars.env"});
 
@@ -20,7 +22,10 @@ app.use(express.static('public'));
 app.use(parser.urlencoded({extended: false}));
 
 
-
+app.use(session({secret:"secret for an encryption"}))
+app.use((req, res,next)=>{
+    res.locals.user = req.session.uerInfo;
+});
 
 //keys.getMongoURL(),
 mongoose.connect(process.env.DATABASE_URL, {userNewUrlParser: true}) 
@@ -44,32 +49,7 @@ app.get("/roomlist", (req,res)=>{
     res.render("roomList");
 });
 
-app.get("/login", (req,res)=>{
-    res.render("login");
-});
 
-
-
-app.post("/login", (req,res)=>{
-
-    let error = [];
-
-    if(req.body.email==""){
-        error.push("Please enter email");
-    }
-
-    if(req.body.password==""){
-        error.push("Please enter password");
-    }
-
-    if(error.length > 0){
-        res.render("login",
-        {
-            message:error
-        });
-    }
-
-});
 
 const PORT = process.env.PORT
 
