@@ -2,6 +2,7 @@ const express = require("express");
 const parser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const session = require("express-session");
 
 const methods = require("../middlewares/middleware");
 let checkAccess = methods.checkAccess;
@@ -24,11 +25,9 @@ router.post("/login", (req,res)=>{
         email: req.body.email,
         password: req.body.password
     }
-
-    if(userData.email == ""){error.email.push("Please enter email.");}
-    
+    if(userData.email == ""){error.email.push("Please enter email.");} 
     if(userData.password == ""){error.password.push("Please enter password.");}
-    console.log(`COMPARED IS :${error.password}`);
+  
     User.findOne({email:userData.email})
     .then(result=>{
         
@@ -41,12 +40,16 @@ router.post("/login", (req,res)=>{
             });
             
         }else{       
-            
+            console.log(`COMPARED IS :${req.body.password}`);
             bcrypt.compare(userData.password, result.password)
             .then(compared=>{
                 if(compared == true){
+                    console.log(`THIS IS result: ${result}`);
+                    console.log(`THIS IS compared: ${compared}`);
                     req.session.userInfo = result;
-                    res.redirect("/dashboard");
+                    res.redirect("/userdashboard");
+                    console.log(`THIS is name: ${req.session.userName}`);
+                    
                 }else{
                     if(userData.password != ""){
                         error.password.push("Password is not found!");
@@ -72,12 +75,12 @@ router.get("/logout",(req,res)=>{
     res.redirect("/user/login");
 });
 
-router.get("/userdashboard", (req,res)=>{
+router.get("/userdashboard/:id", (req,res)=>{
 
     res.render("userDashboard");
 });
 
-router.get("/admindashboard", (req,res)=>{
+router.get("/admindashboard/:id", (req,res)=>{
 
     res.render("adminDashboard");
 });

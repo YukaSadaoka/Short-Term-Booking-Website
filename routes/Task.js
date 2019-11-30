@@ -128,13 +128,13 @@ router.post("/registration", (req,res)=>
         const userSignup = new Task(newUser);
 
         userSignup.save()
-        .then(()=>{
+        .then(saved=>{
             console.log("User information was added to the database");
     
             console.log(`creating session with userSignup: ${userSignup}`);
            
             data = {firstname: newUser.firstname, lastname: newUser.lastname};
-            res.redirect("/user/userdashboard");
+            res.redirect(`/user/userdashboard/${saved._id}`);
             // res.render("userDashboard", ()=>{
             //     user: data
             // });
