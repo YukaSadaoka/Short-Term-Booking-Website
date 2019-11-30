@@ -22,19 +22,12 @@ app.use(session({
 app.use((req, res, next)=>{
    // console.log(`Session Info in app.js: ${req.session.userInfo}`);
     res.locals.userInfo = req.session.userInfo; 
-    //it has to keep the same name, because it is going to pass from req to res
-    //on every request to the server
-   // console.log(`Global seesion Info in app.js: ${res.locals.user}`);
     next();
 });
-//routes
-const signupRoutes = require("./routes/Task"); // is this the register? yes
-// ok, so this route is not protected. .. and you dont have access to the user info here
-// there is one problem because i thought i needed to redirect user after registration to dashboard that is protected now
-//but if i don't need to direct there, i think this's solved
-//you can do it by creating a session at the end and then redirect the user to the dashboard
-// i'll show
-const userRoutes = require("./routes/User");// this is for log in
+
+const signupRoutes = require("./routes/Task"); 
+const userRoutes = require("./routes/User");
+const adminRoutes = require("./routes/Admin");
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -42,6 +35,7 @@ app.use(express.static('public'));
 
 app.use("/signup",signupRoutes);
 app.use("/user", userRoutes);
+app.use("/admin", adminRoutes);
 
 app.get("/", (req, res)=>{
     res.render("home");
