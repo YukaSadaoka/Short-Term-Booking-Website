@@ -1,16 +1,22 @@
 exports.checkAccess = (req, res, next)=>{
-    if(req.session.user == null){
-        console.log("This is middleware");
-       res.redicrect("/user/login");
+    /*if(res.locals.user == undefined){
+        console.log(` This is session info inside middleware.js: ${res.locals.user}`)
+        res.redirect("/user/login");
     }else{
         next();
+    }*/  
+    if (req.session.userInfo == null) {
+       // console.log(` This is session info inside middleware.js: ${res.locals.user}`)
+        res.redirect("/user/login");
+    } else {
+    next();
     }
 };
 
-//admin router
-exports.checkAdmin = (req,res,next)=>{
-    if(res.session.user.admin != true){
-        res.redicrect("/dashboard");
+
+exports.checkLogin = (req,res,next)=>{
+    if(req.session.userInfo != null){
+        res.redirect("/user/profile");
     }else{
         next();
     }

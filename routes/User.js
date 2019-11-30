@@ -3,17 +3,24 @@ const parser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const session = require("express-session");
-
 const methods = require("../middlewares/middleware");
-let checkAccess = methods.checkAccess;
-let checkAdmin = methods.checkAdmin;
 const User = require("../models/signupTasks");
 
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
+router.use(session({secret:'secret for an encryption'}));
+//DO we need to add the user(session....) everwhere i wanan use session?
+// i thougth i only needed to include this once in app.js
+//session is divided in setup and using it... here is the setup
+// without this setup in all files where i need to use setups, my app doesn't work
+//but is it supposed to have this setup once or multiple?
+// setup is just once
+let checkAccess = methods.checkAccess; // this is the middleware to avoid code repetition, this is using the session
+let checkLogin = methods.checkLogin;
 
 
-router.get("/login", (req,res)=>{
+
+router.get("/login", checkLogin, (req,res)=>{
     res.render("login");
 });
 
@@ -40,15 +47,16 @@ router.post("/login", (req,res)=>{
             });
             
         }else{       
-            console.log(`COMPARED IS :${req.body.password}`);
             bcrypt.compare(userData.password, result.password)
             .then(compared=>{
+
+                console.log(`THIS IS result: ${result}`);
+                console.log(`THIS IS compared: ${compared}`);
                 if(compared == true){
-                    console.log(`THIS IS result: ${result}`);
-                    console.log(`THIS IS compared: ${compared}`);
+                   
                     req.session.userInfo = result;
-                    res.redirect("/userdashboard");
-                    console.log(`THIS is name: ${req.session.userName}`);
+                    res.redirect("/user/profile");
+                    console.log(`THIS is name: ${req.session.userInfo}`);
                     
                 }else{
                     if(userData.password != ""){
@@ -60,7 +68,6 @@ router.post("/login", (req,res)=>{
                         password:req.body.password,
                         err:error
                     });
-                    console.log(`COMPARED IS :${error.password}`);
                 }
             })
             .catch(err=>{console.log(`Error occurs during decryption ${err}`)})
@@ -71,18 +78,26 @@ router.post("/login", (req,res)=>{
 });
 
 router.get("/logout",(req,res)=>{
-    //req.session.destroy();
+    req.session.destroy();
     res.redirect("/user/login");
 });
-
-router.get("/userdashboard/:id", (req,res)=>{
-
-    res.render("userDashboard");
+//I have one more question about the URL 
+// if user logs in successfully, is the URL including their ID??
+// no, it will create a cookie with their credentials (encrypted with the key that you provided)
+router.get("/profile",checkAccess,(req,res)=>
+{   
+    if(req.session.userInfo.admin == false){
+        res.render("userDashboard",{
+            firstname: req.session.userInfo.firstname,
+            lastname: req.session.userInfo.lastname,
+        });
+    }else{
+        res.render("adminDashboard",{
+            firstname: req.session.userInfo.firstname,
+            lastname: req.session.userInfo.lasttname,
+        });
+    }
 });
 
-router.get("/admindashboard/:id", (req,res)=>{
-
-    res.render("adminDashboard");
-});
 
 module.exports=router;

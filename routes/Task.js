@@ -2,12 +2,16 @@ const express = require("express");
 const parser = require("body-parser");
 const router = express.Router();
 const Task = require("../models/signupTasks");
+const session = require("express-session");
+const middlewares = require("../middlewares/middleware");
 
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
+router.use(session({secret:'secret for an encryption'}));
+const checkLogin = middlewares.checkLogin;
 
-// the route /signup/registration
-router.get("/registration", (req, res)=>{
+//the route /signup/registration
+router.get("/registration",checkLogin, (req, res)=>{
 
     //Handlebars route
     res.render("registration");
@@ -131,13 +135,11 @@ router.post("/registration", (req,res)=>
         .then(saved=>{
             console.log("User information was added to the database");
     
-            console.log(`creating session with userSignup: ${userSignup}`);
-           
-            data = {firstname: newUser.firstname, lastname: newUser.lastname};
-            res.redirect(`/user/userdashboard/${saved._id}`);
-            // res.render("userDashboard", ()=>{
-            //     user: data
-            // });
+            req.session.userInfo = saved/*newUser*/; // this is creating the session :)
+            // now i think it should work as you want
+            // can you try? sure
+            console.log(`this is session info inside task.js: ${req.session.userInfo}`);
+            res.redirect("/user/profile");
         })
         .catch(err=>console.log("Error: "+ err));
     }
