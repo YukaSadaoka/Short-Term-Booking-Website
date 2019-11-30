@@ -1,14 +1,10 @@
 const express = require("express");
 const parser = require("body-parser");
-const bcrypt = require('bcryptjs');
 const router = express.Router();
 const Task = require("../models/signupTasks");
 
-
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
-
-
 
 // the route /signup/registration
 router.get("/registration", (req, res)=>{
@@ -21,7 +17,7 @@ router.post("/registration", (req,res)=>
 {
     let err = {username: [], email: [], firstname:[],lastname: [],password:[], birthday:[]};
     let counter = 0;
-    
+
     const user = req.body.username;
     const userReg1 = /^[A-Z][A-Za-z0-9!$#@_]{1,}/;
     const userReg2 = /.*[0-9].*/;
@@ -76,7 +72,6 @@ router.post("/registration", (req,res)=>
     if(counter > 0){
         Task.findOne({username:req.body.username})
         .then(result =>{
-            console.log(`ERROR res: ${result}`);
             //console.log(`ERROR res: ${err.username}`);
 
             if(result != null){
@@ -97,67 +92,56 @@ router.post("/registration", (req,res)=>
         });
     }
     else{
-        let salt = bcrypt.genSaltSync(10);
-        let hash = bcrypt.hash(req.body.password1, salt);
-        console.log(hash);
-
         const newUser =
         {
             username: req.body.username,
             email: req.body.email,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
-            password: hash,
+            password: req.body.password1,
             birthday: req.body.bday
         }
-
         const nodemailer = require("nodemailer");
         const sgTransport = require("nodemailer-sendgrid-transport");
-
         const options = {
             auth:{
                 api_key: process.env.SENDGRID_API
             }
         }
-
         const mailer = nodemailer.createTransport(sgTransport(options));
-
         const email = {
             to: req.body.email,
             from: process.env.MYEMAIL,
-            subject: 'Welcome to PerfectRoom',
-            text: 'Hi ' + req.body.firstname + '! Welcome to PerfectRoom!' + '<br>' + 'Your information has been registered in our system'
-            + '<br>' + 'Your username: ' + req.body.username  + '<br>',
-            html: 'Hi ' + req.body.firstname + '! Welcome to PerfectRoom!' + '<br>' + 'Your information has been registered in our system'
-            + '<br>' + 'Your username: ' + req.body.username  + '<br>',
-        };
-
-       
+            subject: `Welcome to PerfectRoom`,
+            text: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom
+            <br>Your username: ${req.body.username} <br>`,
+            html: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom
+            <br>Your username: ${req.body.username} <br>`,
+        };    
         mailer.sendMail(email, (err,res)=>{
             if(err){
-                console.log("Error ocurrs while sending email: ${err}");
+                console.log(`Error ocurrs while sending email: ${err}`);
             }
             console.log(res);
         });
-
 
         const userSignup = new Task(newUser);
 
         userSignup.save()
         .then(()=>{
             console.log("User information was added to the database");
-            res.redirect("/signup/dashboard");
-
+    
+            console.log(`creating session with userSignup: ${userSignup}`);
+           
+            data = {firstname: newUser.firstname, lastname: newUser.lastname};
+            res.redirect("/user/userdashboard");
+            // res.render("userDashboard", ()=>{
+            //     user: data
+            // });
         })
         .catch(err=>console.log("Error: "+ err));
     }
 });
-
-router.get("/dashboard",(req,res)=>{
-
-    res.render("userDashboard");
-});
-
 
 
 module.exports=router;

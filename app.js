@@ -18,16 +18,19 @@ app.use("/user", userRoutes);
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
+app.use(parser.urlencoded({extended: false}));
+
+app.use(express.static('public'));
 
 app.use(session({secret:'secret for an encryption', resave: true, saveUninitialized: true}));
 
 app.use((req, res, next)=>{
+    console.log(`Session Info: ${req.session.userInfo}`);
     res.locals.user = req.session.userInfo;
     next();
 });
 
-app.use(express.static('public'));
-app.use(parser.urlencoded({extended: false}));
+
 
 
 

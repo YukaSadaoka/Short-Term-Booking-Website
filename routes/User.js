@@ -3,6 +3,9 @@ const parser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 
+const methods = require("../middlewares/middleware");
+let checkAccess = methods.checkAccess;
+let checkAdmin = methods.checkAdmin;
 const User = require("../models/signupTasks");
 
 router.use(parser.urlencoded({ extended: false }));
@@ -38,14 +41,16 @@ router.post("/login", (req,res)=>{
             });
             
         }else{       
-          
+            
             bcrypt.compare(userData.password, result.password)
             .then(compared=>{
                 if(compared == true){
                     req.session.userInfo = result;
                     res.redirect("/dashboard");
                 }else{
-                    error.password.push("Password is not found!");
+                    if(userData.password != ""){
+                        error.password.push("Password is not found!");
+                    }                    
                     res.render("login",
                     {
                         email:req.body.email,
@@ -63,12 +68,18 @@ router.post("/login", (req,res)=>{
 });
 
 router.get("/logout",(req,res)=>{
-    req.session.destroy();
-    res.redirect("/login");
+    //req.session.destroy();
+    res.redirect("/user/login");
 });
 
-router.get("/profile",(req,res)=>{
+router.get("/userdashboard", (req,res)=>{
+
     res.render("userDashboard");
+});
+
+router.get("/admindashboard", (req,res)=>{
+
+    res.render("adminDashboard");
 });
 
 module.exports=router;
