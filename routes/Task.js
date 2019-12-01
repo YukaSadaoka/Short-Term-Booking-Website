@@ -96,15 +96,6 @@ router.post("/registration", (req,res)=>
         });
     }
     else{
-        const newUser =
-        {
-            username: req.body.username,
-            email: req.body.email,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            password: req.body.password1,
-            birthday: req.body.bday
-        }
         const nodemailer = require("nodemailer");
         const sgTransport = require("nodemailer-sendgrid-transport");
         const options = {
@@ -129,6 +120,15 @@ router.post("/registration", (req,res)=>
             console.log(res);
         });
 
+        const newUser =
+        {
+            username: req.body.username,
+            email: req.body.email,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            password: req.body.password1,
+            birthday: req.body.bday
+        }
         const userSignup = new Task(newUser);
 
         userSignup.save()

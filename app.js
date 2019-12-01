@@ -2,18 +2,15 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const parser = require("body-parser"); 
 const mongoose = require("mongoose");
-//const fileupload = require("express-fileupload");
+const fileupload = require("express-fileupload");
 const session = require("express-session");
 const path = require("path");
 require("dotenv").config( {path: "./config/vars.env"});
-
 const app = express();
 
-//body-parser
+//body-parser -> file-upload -> method_overide -> session
 app.use(parser.urlencoded({extended: false})); 
-//file-upload
-//method_overide
-//session
+app.use(fileupload());
 app.use(session({
     secret:'secret for an encryption', // this is the key to encrypt
     resave: false,
@@ -27,7 +24,7 @@ app.use((req, res, next)=>{
 
 const signupRoutes = require("./routes/Task"); 
 const userRoutes = require("./routes/User");
-const adminRoutes = require("./routes/Admin");
+const adminRoutes = require("./routes/Administrator");
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -35,7 +32,7 @@ app.use(express.static('public'));
 
 app.use("/signup",signupRoutes);
 app.use("/user", userRoutes);
-app.use("/admin", adminRoutes);
+app.use("/admin",adminRoutes);
 
 app.get("/", (req, res)=>{
     res.render("home");
