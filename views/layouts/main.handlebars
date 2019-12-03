@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <title>PerfectRoom</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/style_roomList.css">
-    <link rel="stylesheet" href="./css/style_registration.css">
-    <link rel="stylesheet" href="./css/style_login.css">
-    <link rel="stylesheet" href="./css/style_dashboard.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style_roomList.css">
+    <link rel="stylesheet" href="/css/style_registration.css">
+    <link rel="stylesheet" href="/css/style_login.css">
+    <link rel="stylesheet" href="/css/style_dashboard.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
 </head>
@@ -28,16 +28,29 @@
                     <li class="nav-item active">
                         <a class="top_links" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="top_links" class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal" style="color:black">Sign up
-                        <span class="sr-only">(current)</span></a>
+
+                    {{#if userInfo}}
+
+                    <li class="nav-item active">
+                        <a class="top_links" class="nav-link" href="/user/profile">Dashboard<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="top_links" class="nav-link" href="/user/login">Log In<span class="sr-only">(current)</span></a>
-                    </li>      
+                        <a class="top_links" class="nav-link" href="/user/logout">Log Out<span class="sr-only">(current)</span></a>
+                    </li>    
+
+                    {{else}}
+                            <li class="nav-item">
+                            <a class="top_links" class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal" style="color:black">Sign up
+                            <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                            <a class="top_links" class="nav-link" href="/user/login">Log In<span class="sr-only">(current)</span></a>
+                            </li>      
+                    {{/if}}
+                 
                     </li>
                         <li class="nav-item active">
-                        <a class="top_links" class="nav-link" href="/roomlist">Room List<span class="sr-only">(current)</span></a>
+                        <a class="top_links" class="nav-link" href="/contents/search">Room List<span class="sr-only">(current)</span></a>
                     </li>     
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

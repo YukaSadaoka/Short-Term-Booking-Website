@@ -25,6 +25,7 @@ app.use((req, res, next)=>{
 const signupRoutes = require("./routes/Task"); 
 const userRoutes = require("./routes/User");
 const adminRoutes = require("./routes/Administrator");
+const generalRoutes = require("./routes/General");
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -33,13 +34,9 @@ app.use(express.static('public'));
 app.use("/signup",signupRoutes);
 app.use("/user", userRoutes);
 app.use("/admin",adminRoutes);
-
+app.use("/contents", generalRoutes);
 app.get("/", (req, res)=>{
     res.render("home");
-});
-
-app.get("/roomlist", (req,res)=>{
-    res.render("roomList");
 });
 
 //keys.getMongoURL(),

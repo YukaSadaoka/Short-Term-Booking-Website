@@ -43,6 +43,7 @@
         <div class="upcoming_container" class="table-responsive">
           <div class="d-flex flex-column bd-highlight mb-3">
                 <div class="upcoming_title"><h2>Your Listings</h2></div>
+                <a href="/admin/addrooms"><button type="button" class="btn btn-outline-primary">Add Room</button></a>
                 <ul>
                   {{#each lists}}
                     <li>
@@ -62,7 +63,7 @@
                      {{else}}
                       <div class="alert alert-danger" role="alert">
                         <a href="/admin/addrooms" class="link_no_rooms">
-                          <h5 class="alert-heading">Your don't have any room listing yet!<br> Are you ready to start listing your room to earn $1830 per month?</h5>
+                          <h5 class="alert-heading">Your don't have any room listing yet!<br>Are you ready to start listing your room to earn $1830 per month?</h5>
                         </a>
                       </div>
                   {{/each}}

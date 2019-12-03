@@ -5,12 +5,16 @@ const router = express.Router();
 const session = require("express-session");
 const methods = require("../middlewares/middleware");
 const User = require("../models/signupTasks");
+const Room = require("../models/rooms");
+const Book = require("../models/bookings");
 
 router.use(parser.urlencoded({ extended: false }));
 router.use(express.static('public'));
 router.use(session({secret:'secret for an encryption'}));
+
 let checkAccess = methods.checkAccess; 
 let checkLogin = methods.checkLogin;
+let checkUser = methods.checkUser;
 
 
 
@@ -84,6 +88,61 @@ router.get("/profile",checkAccess,(req,res)=>
             firstname: req.session.userInfo.firstname,
             lastname: req.session.userInfo.lasttname,
         });
+    }
+});
+
+router.get("/bookroom/:id",checkAccess,checkUser,(req, res)=>{
+    
+    Room.findById(req.params.id)
+    .then(found=>{
+        console.log(`found: ${found}`);
+        res.render("booking",{
+            room:found
+        });
+    })
+    .catch(err=>{console.log(`error happens in booking: ${err}`);})
+});
+
+router.post("/bookroom/:id",(req,res)=>{
+    let err = {in:[], out:[], guests:[]};
+    let count = 0;
+
+    if(req.body.in == ""){
+        err.in.push("Please enter check-in date");
+        count++;
+    }
+    if(req.body.out == ""){
+        err.out.push("Please enter check-out date");
+        count++;
+    }
+    if(req.body.guests <= 0){
+        err.guests.push("Please select only positive number");
+        count++;
+    }
+    console.log(`session Info: ${req.session.userInfo._id}`);
+
+    if(count > 0){
+        res.render("booking",{
+            error: err,
+            in: req.body.in,
+            out: req.body.out            
+        })
+    }
+    else{
+
+        const bookInfo = {
+            checkin:req.body.in,
+            checkout:req.body.out,
+            guests: req.body.guests,
+            guestid: req.session.userInfo._id
+        }
+        const bookData = new Book(bookInfo);
+
+        bookData.save()
+        .then(savedBooking=>{
+            res.redirect("/user/profile");
+        })
+        .catch(err=>{console.log(`error in booking: ${err}`)});
     }
 });
 

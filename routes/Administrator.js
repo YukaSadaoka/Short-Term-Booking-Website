@@ -1,14 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const parser = require("body-parser");
+const path = require('path');
+const session = require("express-session");
 const methodOverride = require("method-override");
 const Room = require("../models/rooms.js");
+const middleware = require("../middlewares/middleware")
+
 
 router.use(parser.urlencoded({extended:false}));
 router.use(express.static('public'));
 router.use(methodOverride('_method'));
+router.use(session({
+    secret:'secret for an encryption', // this is the key to encrypt
+    resave: false,
+    saveUninitialized: false,
+}));
+const checkAdmin = middleware.checkAdmin;
+const checkAccess = middleware.checkAccess;
 
-router.get("/managerooms", (req,res)=>{
+
+router.get("/managerooms", checkAccess, checkAdmin,(req,res)=>{
     
     Room.find()
     .then(roomFound =>{
@@ -19,7 +31,7 @@ router.get("/managerooms", (req,res)=>{
     .catch(err=>{console.log(`Can't find rooms in database: ${err}`)});
 });
 
-router.get("/addrooms", (req,res)=>{
+router.get("/addrooms",checkAccess, checkAdmin,(req,res)=>{
     
     res.render("addRooms");
 });
@@ -73,20 +85,23 @@ router.post("/addrooms",(req,res)=>{
         const room = new Room(validRoom);
         room.save()
         .then(savedRoom =>{
-            req.files.photo.name = `pic_${savedRoom._id}.ext`
+            req.files.photo.name = `pic_${savedRoom._id}${path.parse(req.files.photo.name).ext}`
 
-            console.log(`validRoom is: ${req.files.photo.name }`);
+            console.log(`validRoom is: ${req.files.photo.name}`);
             req.files.photo.mv(`public/userPics/${req.files.photo.name}`)
             .then(()=>{
-                console.log(`room is added to database: ${savedRoom}`);
-                res.redirect("/admin/managerooms");
+                savedRoom.updateOne({photo: `/userPics/${req.files.photo.name}`})
+                .then(()=>{    
+                    console.log(`room is added to database: ${savedRoom}`);
+                    res.redirect("/admin/managerooms");
+                }) 
             });           
         })
         .catch(err=>{console.log(`Error in save() in admin.js: ${err}`);});
     }
 });
 
-router.get("/editrooms/:id",(req,res)=>{
+router.get("/editrooms/:id",checkAccess, checkAdmin, (req,res)=>{
 
     Room.findById(req.params.id)
     .then((roomNow)=>{
@@ -96,23 +111,44 @@ router.get("/editrooms/:id",(req,res)=>{
             title:roomNow.title,
             price:roomNow.price,
             description:roomNow.description,
-            location: roomNow.location
+            location: roomNow.location,
+            photo: roomNow.photo
         });
     }).catch(err=>{console.log(`error to find a room: ${err}`); })
 });
 
 router.put("/editrooms/:id",(req,res)=>{
-    
+    let photoChanged = false;
     Room.findById(req.params.id)
     .then((roomFound)=>{
+        
         roomFound.title = req.body.title;
         roomFound.price = req.body.price;
         roomFound.description = req.body.description;
         roomFound.location = req.body.location;
+           
+        if(req.files != null){
+            let num = Math.round(Math.pow(Math.random()*5432, 3));
+            req.files.photo.name = `pic_${num}_${roomFound._id}${path.parse(req.files.photo.name).ext}`
+            roomFound.photo = req.files.photo.name;
+            photoChanged = true;
+        }
+
+        console.log(`photo name: ${roomFound.photo}`);
 
         roomFound.save()
         .then(updatedRoom=>{
-            res.redirect("/admin/managerooms");
+            if(photoChanged){
+                req.files.photo.mv(`public/userPics/${req.files.photo.name}`)
+                .then(()=>{
+                    updatedRoom.updateOne({photo:`/userPics/${req.files.photo.name}`})
+                    .then(()=>{         
+                        res.redirect("/admin/managerooms");
+                    }).catch(err=>{console.log(`error: ${err}`);}) ;
+                });    
+            }else{
+                res.redirect("/admin/managerooms");
+            }
         })
         .catch(err=>{console.log(`err to update room:${err}`);});
     }).catch(err=>{
@@ -120,9 +156,6 @@ router.put("/editrooms/:id",(req,res)=>{
         res.redirect("/admin/managerooms");
     });
 
-})
-
-
-
+});
 
 module.exports=router;
