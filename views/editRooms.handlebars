@@ -3,13 +3,8 @@
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column" style="margin: 40px 20px;">
-          <li class="nav-item" >
-            <a class="dashboard_nav_link" class="nav-link" href="#">
-              <span data-feather="file">Booking</span>
-            </a>
-          </li>
           <li class="nav-item">
-            <a class="dashboard_nav_link" class="nav-link" href="#">
+            <a class="dashboard_nav_link" class="nav-link" href="/admin/managerooms">
               <span data-feather="shopping-cart">Manage Rooms</span>
             </a>
           </li>
@@ -25,7 +20,7 @@
           </li>
           <li class="nav-item">
             <a class="dashboard_nav_link" class="nav-link" href="/user/logout">
-              <span data-feather="users">Logout</span>
+              <span data-feather="users">Log Out</span>
             </a>
           </li>
         </ul>
@@ -72,7 +67,7 @@
                 {{/each}}
             </div>
             {{#if photo}}
-            <img src="{{photo}}" alt="picture">
+            <img class="edit_photo" src="{{photo}}" alt="picture">
             {{/if}}
             <div class="mb-4">
                 <label for="photo">Upload New Photo</label>

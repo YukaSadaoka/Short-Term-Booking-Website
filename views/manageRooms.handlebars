@@ -4,13 +4,6 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column" style="margin: 40px 20px;">
           <li class="nav-item">
-          </li>
-          <li class="nav-item" >
-            <a class="dashboard_nav_link" class="nav-link" href="#">
-              <span data-feather="file">Booking</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="dashboard_nav_link" class="nav-link" href="#">
               <span data-feather="shopping-cart">Manage Rooms</span>
             </a>
@@ -44,16 +37,13 @@
           <div class="d-flex flex-column bd-highlight mb-3">
                 <div class="upcoming_title"><h2>Your Listings</h2></div>
                 <a href="/admin/addrooms"><button type="button" class="btn btn-outline-primary">Add Room</button></a>
-                <ul>
+                <ul class="list-group">
                   {{#each lists}}
-                    <li>
+                    <li class="list-group-item">
                       <a href="/admin/editrooms/{{this._id}}" class="upcoming_link">
-                        <div class="container-fluid" class="p-2 bd-highlight">
-                          <div class="upcoming_dashboard" class="row">
-                            <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/> <image xlink:href="https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png" height="200" width="200"/>
-                            <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <div>
+                          <div class="row">
                             <div class="flex_item_upcoming" class="date_trip"></div>
-                            <div class="flex_item_upcoming">{{this.roomname}}</div>
                             <div class="flex_item_upcoming">{{this.location}}</div>
                             <div class="flex_item_upcoming">{{this.title}}</div>
                           </div>

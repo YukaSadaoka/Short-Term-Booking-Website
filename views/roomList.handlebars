@@ -1,7 +1,7 @@
 <main>
     <section class="jumbotron text-center">
-        <h1 class=" room_header" >Room</h1>
-            <div><h2>Where do you want to go?</h2>
+        <h1 class="room_header" >Explore Rooms</h1>
+            <div><h2>Where Would You Like to Go?</h2>
                 <form method="POST" action="/contents/search" >
                     <select class="custom-select" id="validationTooltip04" name="choice"  required>
                         <option selected disabled value="">Select a City</option>
@@ -14,28 +14,28 @@
             </div>
     </section>
     <div class="album py-5 bg-light" style="display=flex;">
+            {{#if lists}}   
             {{#each lists}}
-                <div class = "card-deck" class="room_container">
-                <div class="card">
-                    <a href="/user/bookroom/{{this._id}}">
-                    <img class="card-img-top"  src="{{this.photo}}" alt="room picture">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">{{this.description}}</p>
-                        <div "card-text">From ${{this.price}} / night</div>
-                        <span "card-text">4.08(530) </span ><i class = "fas fa-star"></i>
-                        <p class="card-text"><small class="text-muted"></small></p>
+                    <div class = "card-deck" class="room_container">
+                    <div class="card">
+                        <a href="/user/bookroom/{{this._id}}">
+                        <img class="card-img-top"  src="{{this.photo}}" alt="room picture">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <div "card-text">From ${{this.price}} / night</div>
+                            <span "card-text">4.08(530) </span ><i class = "fas fa-star"></i>
+                            <p class="card-text"><small class="text-muted"></small></p>
+                        </div>
+                        </a>
                     </div>
-                    </a>
-                </div>
-            {{else}}
-                 <div class="alert alert-danger" role="alert">
-                    <h5 class="alert-heading">Sorry We don't have rooms matched to your preference at this moment. Please come back later.</h5>
-                    </a>
-                </div>
             {{/each}}
-    </div> 
-   
+            {{else}} 
+                <div>
+                    <div class="alert alert-danger" role="alert"><h3> {{error}} </h3></div>
+                </div>
+            {{/if}}
+    </div>
 </main>
 
 

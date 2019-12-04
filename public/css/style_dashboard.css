@@ -25,9 +25,9 @@
 }
 
 .upcoming_dashboard{
-    
+    margin: 1em;
     border-radius: 2%;
-    border: 0.2px solid gainsboro;
+     border: 0.2px solid gainsboro;
     display: flex;
     flex-direction: row; 
     flex-grow: 1;

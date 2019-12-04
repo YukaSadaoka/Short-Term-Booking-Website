@@ -47,20 +47,28 @@
       <div class="upcoming_container" class="table-responsive">
           <div class="d-flex flex-column bd-highlight mb-3">
                 <div class="upcoming_title"><h2>Upcoming Trips</h2></div>
-                <a href="#" class="upcoming_link">
-                <div class="container-fluid" class="p-2 bd-highlight">
-                  <div class="upcoming_dashboard" class="row">
-                    <div class="flex_item_upcoming" class="date_trip">Dec 23 - Dec 28, 4 nights<div>Isla Mujeres</div></div>
-                    <div class="flex_item_upcoming">See and Edit Details</div>
-                    <div class="flex_item_upcoming" ><img class="upcoming_pic" src="/pictures/dashboard_upcoming_one.jpg" alt="dashboard_pic"></div>
+                {{#if bookings}}
+                {{#each bookings}}
+                  <div class="container-fluid" class="p-2 bd-highlight">
+                    <div class="upcoming_dashboard" class="row">
+                      <div class="flex_item_upcoming"><a href="#" class="/bookroom/{{this.roomid}}"><button type="button" class="btn btn-outline-primary" class="btn_admindash">See Trip Details</button></a></div>
+                      <div class="flex_item_upcoming" class="date_trip">{{this.roomtitle}}</div>
+                      <div class="flex_item_upcoming" class="date_trip">Date:{{this.checkin}} - {{this.checkout}}<div>{{title.title}}</div></div>
+                    </div>
                   </div>
+                
+                {{/each}}
+                {{else}}
+                <div class="alert alert-danger" role="alert">
+                    <h5 class="alert-heading">It seems that you have not booked a room yet!</h5>
+                    <a href="/contents/search"><button type="button" class="btn btn-outline-primary">Book Room</button></a>
                 </div>
-                </a>
+                {{/if}}
+                <!--
                 <a href="#" class="upcoming_link">
                 <div class="container-fluid" class="p-2 bd-highlight">
                   <div  class="upcoming_dashboard" class="row">
                     <div class="flex_item_upcoming" class="date_trip">May 7 - May 11, 4 nights<div>Joshua Tree</div></div>
-                    <div class="flex_item_upcoming">See and Edit Details</div>
                     <div class="flex_item_upcoming"><img class="upcoming_pic" src="/pictures/dashboard_upcoming_two.jpg" alt="dashboard_pic"></div>
                   </div>
                 </div>
@@ -74,6 +82,7 @@
                   </div>
                 </div>
                 </a>
+                -->
           </div>
       </div> 
        <div class="refer_container" class="table-responsive">

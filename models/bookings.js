@@ -6,6 +6,9 @@ const booking = new Schema({
     checkout:{type:String, required:true},
     guests:{type:String, required:true},
     guestid:{type:String, required:true},
+    guestname:{type:String, require:true},
+    roomid:{type:String,required:true},
+    roomtitle:{type:String, required:true},
     dateBooked:{ type:Date, default: Date.now()}
 });
 
