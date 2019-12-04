@@ -17,7 +17,6 @@ app.use(session({
     saveUninitialized: false,
 }));
 app.use((req, res, next)=>{
-   // console.log(`Session Info in app.js: ${req.session.userInfo}`);
     res.locals.userInfo = req.session.userInfo; 
     next();
 });
@@ -35,6 +34,7 @@ app.use("/signup",signupRoutes);
 app.use("/user", userRoutes);
 app.use("/admin",adminRoutes);
 app.use("/contents", generalRoutes);
+
 app.get("/", (req, res)=>{
     res.render("home");
 });

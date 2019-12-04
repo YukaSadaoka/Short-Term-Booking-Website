@@ -3,3 +3,21 @@
     height: 300px;
     margin: 1em;
 }
+
+/*User Dashboard*/
+
+
+.btn_invitation{
+    color: white;
+    background-color:  #FF5A5F;
+    border-color: #FF5A5F;
+    border: 1px solid transparent;
+    width: 200px;
+    height: 40px;
+    padding: 0rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+    margin-left: 1em;
+}
+

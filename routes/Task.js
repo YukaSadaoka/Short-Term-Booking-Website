@@ -10,10 +10,8 @@ router.use(express.static('public'));
 router.use(session({secret:'secret for an encryption'}));
 const checkLogin = middlewares.checkLogin;
 
-//the route /signup/registration
 router.get("/registration",checkLogin, (req, res)=>{
 
-    //Handlebars route
     res.render("registration");
 });
 
@@ -34,8 +32,6 @@ router.post("/registration", (req,res)=>
         err.username.push("Username must start with uppercase letter, contain at least one number and can contain symbol(! $ # @ _)");
         counter++;
     }
-        
-    
     if(req.body.email==""){
         err.email.push("Please enter email");
         counter++;
@@ -73,14 +69,17 @@ router.post("/registration", (req,res)=>
         counter++;
     }
 
-    if(counter > 0){
-        Task.findOne({username:req.body.username})
-        .then(result =>{
-            //console.log(`ERROR res: ${err.username}`);
+    Task.findOne({username:req.body.username})
+    .then(result =>{
+        //console.log(`ERROR res: ${err.username}`);
 
-            if(result != null){
-                err.username.push("This Username already exists!");
-            }
+        if(result){
+            console.log(`here ${result}`);
+            err.username.push("This Username already exists!");
+            counter++;
+        }
+
+        if(counter > 0){
             res.render("registration",{
                 err: err,
                 username: req.body.username,
@@ -89,61 +88,49 @@ router.post("/registration", (req,res)=>
                 lastname: req.body.lastname,
                 password: req.body.password1,
                 birthday: req.body.bday
-            });     
-        })
-        .catch(err=>{
-            console.log(`counter is ${err}`);
-        });
-    }
-    else{
-        const nodemailer = require("nodemailer");
-        const sgTransport = require("nodemailer-sendgrid-transport");
-        const options = {
-            auth:{
-                api_key: process.env.SENDGRID_API
-            }
-        }
-        const mailer = nodemailer.createTransport(sgTransport(options));
-        const email = {
-            to: req.body.email,
-            from: process.env.MYEMAIL,
-            subject: `Welcome to PerfectRoom`,
-            text: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom
-            <br>Your username: ${req.body.username} <br>`,
-            html: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom
-            <br>Your username: ${req.body.username} <br>`,
-        };    
-        mailer.sendMail(email, (err,res)=>{
-            if(err){
-                console.log(`Error ocurrs while sending email: ${err}`);
-            }
-            console.log(res);
-        });
+            });            
+        } else{
+            const nodemailer = require("nodemailer");
+            const sgTransport = require("nodemailer-sendgrid-transport");
+            const options = {auth:{ api_key: process.env.SENDGRID_API}};
 
-        const newUser =
-        {
-            username: req.body.username,
-            email: req.body.email,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            password: req.body.password1,
-            birthday: req.body.bday
-        }
-        const userSignup = new Task(newUser);
-
-        userSignup.save()
-        .then(saved=>{
-            console.log("User information was added to the database");
+            const mailer = nodemailer.createTransport(sgTransport(options));
+            const email = {
+                to: req.body.email,
+                from: process.env.MYEMAIL,
+                subject: `Welcome to PerfectRoom`,
+                text: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom <br>Your username: ${req.body.username} <br>`,
+                html: `Hi ${req.body.firstname}! Welcome to PerfectRoom! <br> Your information has been registered to PerfectRoom<br>Your username: ${req.body.username} <br>`,
+            };    
+            mailer.sendMail(email, (err,res)=>{
+                if(err){
+                    console.log(`Error ocurrs while sending email: ${err}`);
+                }
+                console.log(res);
+            });
     
-            req.session.userInfo = saved/*newUser*/; // this is creating the session :)
-            // now i think it should work as you want
-            // can you try? sure
-            console.log(`this is session info inside task.js: ${req.session.userInfo}`);
-            res.redirect("/user/profile");
+            const newUser =
+            {
+                username: req.body.username,
+                email: req.body.email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                password: req.body.password1,
+                birthday: req.body.bday
+            }
+            const userSignup = new Task(newUser);
+    
+            userSignup.save()
+            .then(saved=>{
+                console.log("User information was added to the database");
+                req.session.userInfo = saved; 
+                console.log(`this is session info inside task.js: ${req.session.userInfo}`);
+                res.redirect("/user/profile");
+            })
+            .catch(err=>console.log("Error: "+ err));
+            }
         })
-        .catch(err=>console.log("Error: "+ err));
-    }
+        .catch(err=>{console.log(`counter is ${err}`);});
 });
-
 
 module.exports=router;

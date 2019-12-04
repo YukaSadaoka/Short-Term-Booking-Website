@@ -154,7 +154,7 @@ router.post("/bookroom/:id",(req,res)=>{
         //store booking info 
         Room.findById(req.params.id)
         .then(found=>{
-            let name = req.session.userInfo.firstname + " "+ req.session.userInfo.firstname; 
+            let name = req.session.userInfo.firstname + " "+ req.session.userInfo.lastname; 
 
             const bookInfo = {
                 checkin:req.body.in,

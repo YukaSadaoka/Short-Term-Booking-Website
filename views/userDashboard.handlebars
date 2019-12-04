@@ -51,9 +51,9 @@
                 {{#each bookings}}
                   <div class="container-fluid" class="p-2 bd-highlight">
                     <div class="upcoming_dashboard" class="row">
-                      <div class="flex_item_upcoming"><a href="#" class="/bookroom/{{this.roomid}}"><button type="button" class="btn btn-outline-primary" class="btn_admindash">See Trip Details</button></a></div>
+                      <div class="flex_item_upcoming"><a href="/bookroom/{{this.roomid}}"><button type="button" class="btn btn-outline-primary" class="btn_admindash">See Trip Details</button></a></div>
                       <div class="flex_item_upcoming" class="date_trip">{{this.roomtitle}}</div>
-                      <div class="flex_item_upcoming" class="date_trip">Date:{{this.checkin}} - {{this.checkout}}<div>{{title.title}}</div></div>
+                      <div class="flex_item_upcoming" class="date_trip">Date: {{this.checkin}} - {{this.checkout}}<div>{{title.title}}</div></div>
                     </div>
                   </div>
                 
@@ -64,33 +64,21 @@
                     <a href="/contents/search"><button type="button" class="btn btn-outline-primary">Book Room</button></a>
                 </div>
                 {{/if}}
-                <!--
-                <a href="#" class="upcoming_link">
-                <div class="container-fluid" class="p-2 bd-highlight">
-                  <div  class="upcoming_dashboard" class="row">
-                    <div class="flex_item_upcoming" class="date_trip">May 7 - May 11, 4 nights<div>Joshua Tree</div></div>
-                    <div class="flex_item_upcoming"><img class="upcoming_pic" src="/pictures/dashboard_upcoming_two.jpg" alt="dashboard_pic"></div>
-                  </div>
-                </div>
-                </a>
-                <a href="#" class="upcoming_link">
-                <div class="container-fluid" class="p-2 bd-highlight">
-                  <div class="upcoming_dashboard"  class="row">
-                    <div class="flex_item_upcoming" class="date_trip">Jan 2 - Jan 3, 1 nights<div>Le Plateau, Montreal</div></div>
-                    <div class="flex_item_upcoming">See and Edit Details</div>
-                    <div class="flex_item_upcoming"><img class="upcoming_pic" src="/pictures/dashboard_upcoming_three.jpg" alt="dashboard_pic"></div>
-                  </div>
-                </div>
-                </a>
-                -->
           </div>
       </div> 
        <div class="refer_container" class="table-responsive">
           <div class="d-flex flex-column bd-highlight mb-3">
-                <div class="upcoming_title"><h2>Invite friends</h2></div>
+              <div class="invite"><h2>Invite friends</h2></div>
                 <p>Refer your friends to PerfectRoom and get PerfectRoom in $45 credit</p>
-                <input class="referEmail" type="email" placeholder="Enter your friend's email">
-                <div class="refer_link">or send <a href="#">this link</a></div>
+                <form>
+                <div class="form-group">
+                  <input class="referEmail" type="email" placeholder="Enter your friend's email">
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn_invitation" class="btn btn-lg btn-primary btn-block" value="Send Invitation">
+                </div>
+              </form>
+              <div class="refer_link">or send <a href="#">this link</a></div>      
           </div>
         </div> 
     </main>
