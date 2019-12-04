@@ -1,8 +1,7 @@
 <main role="main" class="container">
     <div class="row">
-        <div >  <!-- class="jumbotron p-4 p-md-5 text-white rounded bg-dark"-->
-             <img src="{{room.photo}}" alt="Room Picture" style="position:; width:100% ;">   
-            
+        <div class="container_roompic">  <!-- class="jumbotron p-4 p-md-5 text-white rounded bg-dark"-->
+             <img src="{{room.photo}}" alt="Room Picture" class="pic_roomDetail">   
         </div>
     </div>
   
@@ -15,18 +14,8 @@
         <p></p>
         <h2>Overview</h2>
         <p>${{room.price}} / night</p>
-        <h3>Sub-heading</h3>
+        <h3>About Room</h3>
         <p>{{room.description}}</p>
-        <pre><code>Example code block</code></pre>
-        <p></p>
-        <h3>Sub-heading</h3>
-        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <ul>
-          <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-          <li>Donec id elit non mi porta gravida at eget metus.</li>
-          <li>Nulla vitae elit libero, a pharetra augue.</li>
-        </ul>
-        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
         <ol>
           <li>Vestibulum id ligula porta felis euismod semper.</li>
           <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
@@ -38,7 +27,7 @@
 
     <aside class="col-md-4 blog-sidebar">
       <div class="p-4 mb-3 bg-light rounded">
-        <h4>Book this room</h4>
+        <h4>Book This Room</h4>
         <form method="POST" action="/user/bookroom/{{room._id}}">
              <div class="form-group">
                 <label for="checkout">Check-in</label>

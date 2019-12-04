@@ -1,40 +1,52 @@
 <main>
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center" style="max-height:400px; margin-bottom:0;">
         <h1 class="room_header" >Explore Rooms</h1>
-            <div><h2>Where Would You Like to Go?</h2>
+            <div><h2>Where Would You Like to Go?</h2></div>
                 <form method="POST" action="/contents/search" >
-                    <select class="custom-select" id="validationTooltip04" name="choice"  required>
-                        <option selected disabled value="">Select a City</option>
-                        <option value="Toronto">Toronto</option>
-                        <option value="New York">New York</option>
-                        <option value="Italy">Italy</option>
-                    </select>
-                    <input type="submit" value="See Rooms" class="btn_signup">
-                </form>
-            </div>
+                    <div  class="roomlist_form" class="form-group">
+                        <div class="roomlistDrop_container">
+                            <select class="custom-select"  name="choice"  required>
+                                <option selected disabled value="">Select a City</option>
+                                <option value="Toronto">Toronto</option>
+                                <option value="New York">New York</option>
+                                <option value="Italy">Italy</option>
+                            </select>
+                        </div>   
+                    </div>
+                <div><input type="submit" value="See Rooms" class="btn_signup"></div>                 
+            </form>
     </section>
-    <div class="album py-5 bg-light" style="display=flex;">
+    <div class="roomlist_location_container">
+        <div class="roomlist_location">
+            <h2>{{location}}</h2>
+        </div>
+    </div>
+    <div class="roomlist_container">
+        <div  class="row row-cols-1 row-cols-md-3">
             {{#if lists}}   
             {{#each lists}}
-                    <div class = "card-deck" class="room_container">
-                    <div class="card">
-                        <a href="/user/bookroom/{{this._id}}">
-                        <img class="card-img-top"  src="{{this.photo}}" alt="room picture">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <div "card-text">From ${{this.price}} / night</div>
-                            <span "card-text">4.08(530) </span ><i class = "fas fa-star"></i>
-                            <p class="card-text"><small class="text-muted"></small></p>
+                    <div class="col mb-4" class="card-deck">
+                        <div class="card" style="width: 20rem;">
+                            <a href="/user/bookroom/{{this._id}}" class="roomlist_link">
+                            <div class="card h-100">
+                                <img class="" class="card-img-top" src="{{this.photo}}" alt="room picture">
+                                <div class="card-body">
+                                <h5 class="card-title">{{this.title}}</h5>
+                                <div "card-text">From ${{this.price}} / night</div>
+                                <span "card-text">4.08(530) </span ><i class = "fas fa-star"></i>
+                                <p class="card-text"><small class="text-muted"></small></p>
+                            </div>
+                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
+                    </div> 
             {{/each}}
             {{else}} 
-                <div>
-                    <div class="alert alert-danger" role="alert"><h3> {{error}} </h3></div>
+                <div class="no_room_container">
+                    <div class="no_room"><h4>{{error}} </h4></div>
                 </div>
             {{/if}}
+        </div>
     </div>
 </main>
 

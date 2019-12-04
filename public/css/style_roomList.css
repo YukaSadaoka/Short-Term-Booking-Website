@@ -1,4 +1,63 @@
 /*roomList.handlebars*/
+
+.roomlistDrop_container{
+    width:300px;
+}
+
+.roomlist_form{
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.no_room{
+    margin: 1em;
+}
+.no_room_container{
+    display: flex;
+    justify-content: center;
+}
+
+.roomlist_container{
+    padding: 2em;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.roomlist_link{
+    text-decoration: none;
+    color: black;
+}
+.roomlist_link:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.roomlist_location_container{
+    display: flex;
+    justify-content: center;
+}
+.roomlist_location{
+    margin-top: 2em;
+}
+
+/*booking.handlebars*/
+
+
+@media screen and  (min-width: 786px) { 
+    .pic_roomDetail{
+        width:700px;
+        border-radius: 3px;
+    } 
+}
+.container_roompic{
+    margin: 2em;
+    
+}
+
+/*til Assignment 3*/
 .room_header{
     margin: 1.5em 1.5em 0.5em 1em;
 
