@@ -6,8 +6,16 @@
     color: black;
 }
 
+.btn_dashboard{
 
+    background-color:  #FF5A5F;
+    border-color: #FF5A5F;
+}
 
+.btn_dashboard:hover{
+    border-color: #FF5A5F;
+    background-color:  #FF5A5F;
+}
 
 
 .dashboard_nav_link:hover{

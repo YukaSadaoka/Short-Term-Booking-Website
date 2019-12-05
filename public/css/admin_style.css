@@ -4,6 +4,31 @@
     margin: 1em;
 }
 
+.err_adminDash{
+    margin: 2em;   
+}
+
+.no_adminRoom{
+    margin: 1em;
+}
+.link_no_rooms{
+    color: black;
+    text-decoration: none;
+}
+.link_no_rooms:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.admin_btn{
+    color: white;
+    background-color: #FF5A5F;
+}
+.admin_btn:hover{
+    color: white;
+    background-color: #FF5A5F;
+}
+
 /*User Dashboard*/
 
 
@@ -20,4 +45,18 @@
     border-radius: .3rem;
     margin-left: 1em;
 }
+.user_book_pic{
+    width: 100px;
+}
 
+.container_usertrips{
+    display: flex;
+    justify-content: space-between;
+    width:70vw;
+}
+
+/* manageroom.handlebars*/
+
+.manageroom_photo{
+    width:100px;
+}

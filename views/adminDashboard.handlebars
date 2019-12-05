@@ -48,14 +48,14 @@
                       <div class="flex_item_upcoming" class="date_trip">Check-out: {{this.checkout}}</div>
                       <div class="flex_item_upcoming">{{this.guests}} Guests</div>
                       <div class="flex_item_upcoming">Booked by {{this.guestname}}</div>                      
-                      <div class="flex_item_upcoming"><button type="button" class="btn btn-outline-primary" class="btn_admindash">Send Message</button></div>
-                      <div class="flex_item_upcoming"><button type="button" class="btn btn-outline-primary" class="btn_admindash">Booking Detail</button></div>
+                      <div class="flex_item_upcoming"><button type="button" class="btn btn-outline-primary admin_btn" class="btn_admindash">Send Message</button></div>
+                      <div class="flex_item_upcoming"><button type="button" class="btn btn-outline-primary admin_btn" class="btn_admindash">Booking Detail</button></div>
                     </div>
                   </div>
                 </div>
                 {{/each}}
                 {{else}}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger err_adminDash" role="alert">
                     <h5 class="alert-heading">You don't have upcoming bookings yet!</h5>
                 </div>
                 {{/if}}

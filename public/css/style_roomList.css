@@ -43,6 +43,10 @@
     margin-top: 2em;
 }
 
+.card-img-top{
+    width: 350px;
+    height: 200px;
+}
 /*booking.handlebars*/
 
 

@@ -20,7 +20,7 @@
           </li>
           <li class="nav-item">
             <a class="dashboard_nav_link" class="nav-link" href="/user/logout">
-              <span data-feather="users">Logout</span>
+              <span data-feather="users">Log Out</span>
             </a>
           </li>
         </ul>
@@ -36,13 +36,14 @@
         <div class="upcoming_container" class="table-responsive">
           <div class="d-flex flex-column bd-highlight mb-3">
                 <div class="upcoming_title"><h2>Your Listings</h2></div>
-                <a href="/admin/addrooms"><button type="button" class="btn btn-outline-primary">Add Room</button></a>
+                <a href="/admin/addrooms"><button type="button" class=" admin_btn btn btn-outline-primary">Add Room</button></a>
                 <ul class="list-group">
                   {{#each lists}}
                     <li class="list-group-item">
                       <a href="/admin/editrooms/{{this._id}}" class="upcoming_link">
                         <div>
                           <div class="row">
+                            <div class="flex_item_upcoming"><img src="{{this.photo}}" alt="room picture" class="manageroom_photo"></div>
                             <div class="flex_item_upcoming" class="date_trip"></div>
                             <div class="flex_item_upcoming">{{this.location}}</div>
                             <div class="flex_item_upcoming">{{this.title}}</div>
@@ -51,7 +52,7 @@
                       </a>
                     </li>
                      {{else}}
-                      <div class="alert alert-danger" role="alert">
+                      <div class="alert alert-danger no_adminRoom" role="alert">
                         <a href="/admin/addrooms" class="link_no_rooms">
                           <h5 class="alert-heading">Your don't have any room listing yet!<br>Are you ready to start listing your room to earn $1830 per month?</h5>
                         </a>

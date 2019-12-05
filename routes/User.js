@@ -16,8 +16,6 @@ let checkAccess = methods.checkAccess;
 let checkLogin = methods.checkLogin;
 let checkUser = methods.checkUser;
 
-
-
 router.get("/login", checkLogin, (req,res)=>{
     res.render("login");
 });
@@ -106,7 +104,7 @@ router.get("/profile",checkAccess,(req,res)=>
                 res.render("adminDashboard",{
                     firstname: req.session.userInfo.firstname,
                     lastname: req.session.userInfo.lasttname,
-                    upcoming: bookings,
+                    upcoming: bookings
                 });        
         })
         .catch(err=>{console.log(`error in profile: ${err}`);});
@@ -137,18 +135,29 @@ router.post("/bookroom/:id",(req,res)=>{
         err.out.push("Please enter check-out date");
         count++;
     }
+    
+    console.log(`value of date: ${req.body.in.value}, date now${Date.now()}`);
+    if(req.body.out < req.body.in){
+        err.out.push("Please enter valid date");
+        count++;
+    }
+
     if(req.body.guests <= 0){
         err.guests.push("Please select only positive number");
         count++;
     }
-    console.log(`session Info: ${req.session.userInfo._id}`);
+      if(count > 0){
 
-    if(count > 0){
-        res.render("booking",{
-            error: err,
-            in: req.body.in,
-            out: req.body.out            
+        Room.findById(req.params.id)
+        .then(found=>{
+              res.render("booking",{
+                room:found,
+                error: err,
+                in: req.body.in,
+                out: req.body.out            
+            })
         })
+        .catch(err=>{console.log(`err at booking: ${err}`);});
     }
     else{
         //store booking info 
@@ -163,21 +172,20 @@ router.post("/bookroom/:id",(req,res)=>{
                 guestid: req.session.userInfo._id,
                 guestname: name,
                 roomid: found._id,
-                roomtitle: found.title
+                roomtitle: found.title,
+                roompic: found.photo
+            
             }
             const bookData = new Book(bookInfo);
             
             bookData.save()
             .then(savedBooking=>{
-
                 console.log(`Successfully store book info:${savedBooking}`);
                 res.redirect("/user/profile");
             })
             .catch(err=>{console.log(`error in finding room in booking: ${err}`);});
         })
-        .catch(err=>{console.log(`error in booking: ${err}`);});
-
-      
+        .catch(err=>{console.log(`error in booking: ${err}`);});      
     }
 });
 

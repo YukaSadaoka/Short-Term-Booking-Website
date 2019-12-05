@@ -4,7 +4,6 @@ const parser = require("body-parser");
 const mongoose = require("mongoose");
 const fileupload = require("express-fileupload");
 const session = require("express-session");
-const path = require("path");
 require("dotenv").config( {path: "./config/vars.env"});
 const app = express();
 

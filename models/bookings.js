@@ -9,6 +9,7 @@ const booking = new Schema({
     guestname:{type:String, require:true},
     roomid:{type:String,required:true},
     roomtitle:{type:String, required:true},
+    roompic:{type:String},
     dateBooked:{ type:Date, default: Date.now()}
 });
 

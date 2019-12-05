@@ -50,18 +50,22 @@
                 {{#if bookings}}
                 {{#each bookings}}
                   <div class="container-fluid" class="p-2 bd-highlight">
-                    <div class="upcoming_dashboard" class="row">
-                      <div class="flex_item_upcoming"><a href="/bookroom/{{this.roomid}}"><button type="button" class="btn btn-outline-primary" class="btn_admindash">See Trip Details</button></a></div>
-                      <div class="flex_item_upcoming" class="date_trip">{{this.roomtitle}}</div>
-                      <div class="flex_item_upcoming" class="date_trip">Date: {{this.checkin}} - {{this.checkout}}<div>{{title.title}}</div></div>
-                    </div>
+                    <div class="row">
+                      <div class="card">
+                        <div class="card-body container_usertrips"> 
+                          <div><img class="user_book_pic" src="{{this.roompic}}" alt="picture"></div>
+                          <div class="flex_item_upcoming"><a href="/bookroom/{{this.roomid}}"><button type="button" class="btn btn-outline-primary btn_dashboard" class="btn_admindash">See Trip Details</button></a></div>
+                          <div class="flex_item_upcoming" class="date_trip">{{this.roomtitle}}</div>
+                          <div class="flex_item_upcoming" class="date_trip">Date: {{this.checkin}} - {{this.checkout}}<div>{{title.title}}</div></div>
+                        </div>
+                      </div> 
                   </div>
-                
+                </div>                
                 {{/each}}
                 {{else}}
                 <div class="alert alert-danger" role="alert">
                     <h5 class="alert-heading">It seems that you have not booked a room yet!</h5>
-                    <a href="/contents/search"><button type="button" class="btn btn-outline-primary">Book Room</button></a>
+                    <a href="/contents/search"><button type="button" class=" admin_btn btn btn-outline-primary">Book Room</button></a>
                 </div>
                 {{/if}}
           </div>

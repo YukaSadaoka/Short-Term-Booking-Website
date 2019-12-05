@@ -69,7 +69,7 @@ router.post("/addrooms",(req,res)=>{
     if(count > 0){   
         res.render("addRooms",{
             error:err,
-            title:req.body.titel,
+            title:req.body.title,
             price:req.body.price,
             description:req.body.description,
             location: req.body.location
