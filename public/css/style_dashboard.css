@@ -1,5 +1,18 @@
 /*userDashboard.handlebars*/
 
+@media  only screen and  (max-width: 575.98px) { 
+    .navbar{
+        width: 100%;
+        position: absolute;
+    }
+}
+@media  only screen and  (max-width: 575.98px) {
+    .container_usertrips{
+      display: block;
+
+    }
+}
+
 .dashboard_nav_link{
     font-size: 20px;
     text-decoration: none;
@@ -61,8 +74,8 @@
 }
 
 .referEmail{
-    width: 400px;
-    height: 40px;
+    width: 15em;
+    height: 2.5em;
     padding-left: 0.5em;
     border: 0.5px solid gainsboro; 
     border-radius: 3px;
