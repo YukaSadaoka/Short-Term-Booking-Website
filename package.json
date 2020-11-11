@@ -14,11 +14,14 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-asyncify": "^1.0.1",
     "express-fileupload": "^1.1.6",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "handlebars-helpers": "^0.10.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.7",
+    "multer": "^1.4.2",
     "nodemailer": "^6.3.1",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^1.19.4",
@@ -31,5 +34,7 @@
   "bugs": {
     "url": "https://github.com/YukaSadaoka/Assignment1/issues"
   },
-  "homepage": "https://github.com/YukaSadaoka/Assignment1#readme"
+  "homepage": "https://github.com/YukaSadaoka/Assignment1#readme",
+  "devDependencies": {},
+  "keywords": []
 }

@@ -23,9 +23,8 @@ router.post("/registration", (req,res)=>
     const user = req.body.username;
     const userReg1 = /^[A-Z][A-Za-z0-9!$#@_]{1,}/;
     const userReg2 = /.*[0-9].*/;
-    //console.log(`return?? : ${result}`);
 
-     if(user==""){
+    if(user==""){
         err.username.push("Please enter username");
         counter++;
     }else if(!(userReg1.test(user)) || !(userReg2.test(user))){

@@ -10,7 +10,6 @@ const booking = new Schema({
     roomid:{type:String,required:true},
     roomtitle:{type:String, required:true},
     roompic:{type:String},
-    dateBooked:{ type:Date, default: Date.now()}
 });
 
 const bookings = mongoose.model("book",booking);

@@ -15,7 +15,6 @@ router.use(session({secret:'secret for an encryption'}));
 let checkAccess = methods.checkAccess; 
 let checkLogin = methods.checkLogin;
 let checkUser = methods.checkUser;
-
 router.get("/login", checkLogin, (req,res)=>{
     res.render("login");
 });
@@ -41,12 +40,10 @@ router.post("/login", (req,res)=>{
                 password:req.body.password,
                 err:error
             });
-            
         }else{       
             bcrypt.compare(userData.password, result.password)
             .then(compared=>{
                 if(compared == true){
-                   
                     req.session.userInfo = result;
                     res.redirect("/user/profile");
                     

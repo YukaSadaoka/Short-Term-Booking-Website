@@ -2,20 +2,20 @@
     <section class="jumbotron text-center" style="max-height:400px; margin-bottom:0;">
         <h1 class="room_header" >Explore Rooms</h1>
             <div><h2>Where Would You Like to Go?</h2></div>
-                <form method="POST" action="/contents/search" >
+                <form method="POST" action="/contents/searchByCity" >
                     <div  class="roomlist_form" class="form-group">
                         <div class="roomlistDrop_container">
                             <select class="custom-select"  name="choice"  required>
                                 <option selected disabled value="">Select a City</option>
                                 <option value="Toronto">Toronto</option>
                                 <option value="New York">New York</option>
-                                <option value="Italy">Italy</option>
+                                <optnoteion value="Italy">Italy</option>
                                 <option value="Tokyo">Tokyo</option>
                             </select>
                         </div>   
                     </div>
-                <div><input type="submit" value="See Rooms" class="btn_signup"></div>                 
-            </form>
+                    <div><input type="submit" value="See Rooms" class="btn_signup"></div>                 
+                </form>
     </section>
     <div class="roomlist_location_container">
         <div class="roomlist_location">

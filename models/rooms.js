@@ -6,6 +6,7 @@ const room = new Schema({
     price:{type:Number, required:true},
     description:{type:String, required:true},
     location:{type:String, required:true},
+    unavailability:{ type:Array, default:[], required:false},
     photo:{type:String}
 });
 

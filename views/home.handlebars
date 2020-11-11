@@ -1,39 +1,55 @@
 <div class="main_back">
     <div class="adjust">
-    <div class="home_form_container" class="card"  class="form-group">
-        <form  class="home_form">    
-            <label  for="inputState">WHERE</label><br>
-            <select id="inputState" class="form-control">
-                <option value="Toronto">Toronto</option>
-                <option value="New York">New York</option>
-                <option value="Italy">Italy</option>
-                <option value="Tokyo">Tokyo</option>        
-            </select>
-            
+        <div class="home_form_container" class="card"  class="form-group">
+        <form method="POST" action="/" class="home_form">    
+            <div>
+                <label  for="inputState">WHERE</label><br>
+                <select name="location" id="inputState" class="form-control {{#if err.location}}is-invalid{{/if}}">
+                    <option value="Location" {{#isFalsey criteria }}selected=selected{{/isFalsey}} {{#eq criteria.location compare="Location"}} selected=selected {{/eq}} disabled>Location</option>
+                    <option value="Toronto"  {{#eq criteria.location  compare="Toronto"}} selected=selected {{/eq}}>Toronto</option>
+                    <option value="New York" {{#eq criteria.location compare="New York"}} selected=selected {{/eq}}>New York</option>
+                    <option value="Italy" {{#eq criteria.location compare="Italy"}} selected=selected {{/eq}}>Italy</option>
+                    <option value="Tokyo" {{#eq criteria.location compare="Tokyo"}} selected=selected {{/eq}}>Tokyo</option>        
+                </select>
+                {{#each err.location}}
+                    <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                {{/each}}
+            </div>
             <div >
                 <label  class="checkIn">CHECK-IN</label><br>
-                    <input type='date' class="form-control" placeholder="dd-mm-yyyy" name='checkIn'>
+                <input type='date' class="form-control  {{#if err.checkIn}}is-invalid{{/if}}"  placeholder="{{#isFalsey criteria.checkIn }}dd-mm-yyyy{{/isFalsey}}" value="{{#isTruthy criteria.checkIn }}{{criteria.checkIn}}{{/isTruthy}}" name="checkIn">
+                {{#each err.checkIn}}
+                    <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                {{/each}}
             </div>
-            <div >
+            <div>
                 <label for="inputCheckOut">CHECK-OUT</label><br>
-                    <input type='date' class="form-control" placeholder="dd-mm-yyyy" name='checkOut'>   
+                <input type="date" class="form-control {{#if err.checkOut}}is-invalid{{/if}}"  placeholder="{{#isFalsey criteria.checkOut }}dd-mm-yyyy{{/isFalsey}}" value="{{#isTruthy criteria.checkOut }}{{criteria.checkOut}}{{/isTruthy}}"  name="checkOut" >   
+                {{#each err.checkOut}}
+                    <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                {{/each}}
             </div>
             <div >
-                <label for="inputState">GUEST</label>
-                <select class="form-control">
-                    <option value="Guests">Guests</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <label for="inputState">GUESTS</label>
+                <select name="guest" class="form-control {{#if err.guest}}is-invalid{{/if}}">
+                    <option value="Guests" {{#isFalsey criteria }}selected=selected{{/isFalsey}} {{#eq criteria.guest compare="Guests"}}selected=selected{{/eq}}disabled>Guests</option>
+                    <option value="1" {{#eq criteria.guest  compare="1"}}  selected=selected {{/eq}}>1</option>
+                    <option value="2" {{#eq criteria.guest  compare="2"}}  selected=selected {{/eq}}>2</option>
+                    <option value="3" {{#eq criteria.guest  compare="3"}}  selected=selected {{/eq}}>3</option>
+                    <option value="4" {{#eq criteria.guest  compare="4"}}  selected=selected {{/eq}}>4</option>
+                    <option value="5+" {{#eq criteria.guest  compare="5+"}}  selected=selected {{/eq}}>5+</option>
                 </select>
+                {{#each err.guest}}
+                    <div class="invalid-feedback" style="margin-top: 0.5em; display:block;">{{this}}</div>
+                {{/each}}
             </div>  
             <div > 
-                <input  type='submit' value="Search" class="btn_serch" class="btn btn-primary" style="margin-top: 1em;">
+                <input type='submit' value="Search" class="btn_serch" class="btn btn-primary" style="margin-top: 1em;">
             </div>
         </form>    
     </div>
-    </div>
-<div  class="container" class="rec_container">
+</div>
+<div  class="container rec_container">
     <div class="top_recommended">
         <div><h2 class="rec_header">Recommended for you</h2></div>
         <div><p>A selection of places to stay verified for quality and design</p></div>
@@ -65,9 +81,10 @@
             </div>
         </div>
     </div>
-    <div  class="container">
+</div>
+<div>
     <div class="home_contents" class="row featurette">
-      <div class="col-md-7">
+      <div class="col-md-7 container">
         <h2 class="featurette-heading">Take A Deep Breath At A Breathtaking Beach<br><span class="text-muted">It’ll Blow Your Mind.</span></h2>
         <p class="lead">Whether you're looking for an isolated stretch of sand in the Caribbean or a family-friendly resort in the middle of the Indian Ocean, we have enough destination options out there to suit every type of traveler.</p>
         <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
@@ -80,7 +97,7 @@
     <hr class="featurette-divider">
 
     <div class="home_contents" class="row featurette">
-      <div class="col-md-7 order-md-2">
+      <div class="col-md-7 order-md-2 container">
         <h2 class="featurette-heading">Love Animals?<br><span class="text-muted">Explore And See For Yourself.</span></h2>
         <p class="lead">There’s just something about this fascinating continent that pulls you in and keeps you wanting to return over and over again. Experience this ultimate in exotic and far-flung destinations.</p>
         <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>  
@@ -89,7 +106,7 @@
        <img src="pictures/home_pic_two.jpg" alt="pic_two"  width="100%" height="100%" />
       </div>
     </div>
-    </div>
+</div>
 
     <div   class="about_container" class="container" >
         <h2 class="about">About PerfectRoom</h2>
