@@ -35,11 +35,7 @@ router.post("/login", (req,res)=>{
         
         if(result == null){
             if(result == null){ error.email.push("Email is not found. Please enter your email again.");}
-            res.render("login",
-            {   email:req.body.email,
-                password:req.body.password,
-                err:error
-            });
+            res.render("login",{ email:req.body.email, password:req.body.password, err:error });
         }else{       
             bcrypt.compare(userData.password, result.password)
             .then(compared=>{
@@ -51,18 +47,17 @@ router.post("/login", (req,res)=>{
                     if(userData.password != ""){
                         error.password.push("Password is not found!");
                     }                    
-                    res.render("login",
-                    {
-                        email:req.body.email,
-                        password:req.body.password,
-                        err:error
-                    });
+                    res.render("login", { email:req.body.email, password:req.body.password, err:error });
                 }
             })
-            .catch(err=>{console.log(`Error occurs during decryption ${err}`)})
+            .catch(err=>{
+                console.log(`Error occurs during decryption ${err}`)
+                res.render("error404");
+            });
         }
     }).catch(err=>{
         console.log(`Error occurs in log in ${err}`);
+        res.render("error404");
     });
 });
 
@@ -86,7 +81,7 @@ router.get("/profile",checkAccess,(req,res)=>
                     firstname: req.session.userInfo.firstname,
                     lastname: req.session.userInfo.lastname,
                     bookings: bookFound,
-                    room: roomBooked// room id as well to render the link
+                    room: roomBooked
                 }); 
             })
             .catch(err=>{console.log(`${err}`);});
@@ -97,14 +92,16 @@ router.get("/profile",checkAccess,(req,res)=>
     //Admin dashboard
         Book.find({})
         .then(bookings=>{
-        console.log(`booking: ${bookings}`)
                 res.render("adminDashboard",{
                     firstname: req.session.userInfo.firstname,
                     lastname: req.session.userInfo.lasttname,
                     upcoming: bookings
                 });        
         })
-        .catch(err=>{console.log(`error in profile: ${err}`);});
+        .catch(err=>{ 
+            console.log(`error occurred in profile: ${err}`);
+            res.render("error404");
+        });
     }
 });
 
@@ -117,7 +114,10 @@ router.get("/bookroom/:id",checkAccess,checkUser,(req, res)=>{
             room:found
         });
     })
-    .catch(err=>{console.log(`error happens in booking: ${err}`);})
+    .catch(err=>{ 
+        console.log(`error happens in booking: ${err}`);
+        res.render("error404");
+    })
 });
 
 router.post("/bookroom/:id",(req,res)=>{
@@ -146,13 +146,7 @@ router.post("/bookroom/:id",(req,res)=>{
       if(count > 0){
 
         Room.findById(req.params.id)
-        .then(found=>{
-              res.render("booking",{
-                room:found,
-                error: err,
-                in: req.body.in,
-                out: req.body.out            
-            })
+        .then(found=>{ res.render("booking",{ room:found, error: err, in: req.body.in, out: req.body.out })        
         })
         .catch(err=>{console.log(`err at booking: ${err}`);});
     }
@@ -171,7 +165,6 @@ router.post("/bookroom/:id",(req,res)=>{
                 roomid: found._id,
                 roomtitle: found.title,
                 roompic: found.photo
-            
             }
             const bookData = new Book(bookInfo);
             
@@ -180,9 +173,15 @@ router.post("/bookroom/:id",(req,res)=>{
                 console.log(`Successfully store book info:${savedBooking}`);
                 res.redirect("/user/profile");
             })
-            .catch(err=>{console.log(`error in finding room in booking: ${err}`);});
+            .catch(err=>{ 
+                console.log(`error in finding room in booking: ${err}`);
+                res.render("error404");
+            });
         })
-        .catch(err=>{console.log(`error in booking: ${err}`);});      
+        .catch(err=>{
+            console.log(`error in booking: ${err}`); 
+            res.render("error404");
+        });      
     }
 });
 

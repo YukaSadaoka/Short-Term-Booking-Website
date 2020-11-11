@@ -29,7 +29,7 @@ app.use((req, res, next)=>{
     next();
 });
 
-const signupRoutes = require("./routes/Task");
+const signupRoutes = require("./routes/RegistrationTask");
 const userRoutes = require("./routes/User");
 const adminRoutes = require("./routes/Administrator");
 const contentsRoutes = require("./routes/RoomList");
