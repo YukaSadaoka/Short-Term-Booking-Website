@@ -1,3 +1,3 @@
 Short Term Booking Website
 
-Heroku https://dashboard.heroku.com/apps/perfect-room
+Heroku Link: https://perfect-room.herokuapp.com
