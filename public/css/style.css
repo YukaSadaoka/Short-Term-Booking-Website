@@ -1,10 +1,53 @@
-body{
-    font-family: sans-serif;
+@media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 480px) { 
+        .home_form_container{
+            max-width:90% !important;
+        }
+
+        .container{
+            max-width:90%;
+        }
+
+        .home_contents{
+            margin: 0 !important;
+        }
+
+        .font_for_mobile{
+            line-height: 2em !important;
+            word-wrap: break-word;
+        }
+    }
+
+@media 
+(max-device-width: 900px) 
+and (orientation: portrait) { 
+    .home_form_container{
+        max-width:70% !important; 
+    }
 }
+
+
+
+body{
+    width: 100%;
+    font-family: sans-serif;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.max_width_100{
+    max-width: 100%  !important;
+}
+
+.to_justify_center{
+    justify-content: center;
+}
+
 
 /*Header - main.handlebars*/
 header{
-    
+    display: grid;
     margin: 0;
     font-family: sans-serif;
 }
@@ -127,20 +170,25 @@ nav.header_container{
     border-radius: 5%;
 }
 .main_back{
-    padding: 3em;
+    padding: 5em;
     margin-top:0;
     background-image: url("/pictures/head_house.jpg");
+    background-position: center;
     background-size: cover;
+    width: 1232px;
     height: 100vh !important;
     min-height: 680px !important;
     max-height: 1500px !important; 
+    box-sizing: border-box;
 }
+
 .home_form_container{
+    
     text-align: centre;
     padding: 2em;
     background-color: white;
     border-radius: 5%;
-    max-width:500px;
+    max-width:40%;
 }
 
 
@@ -183,7 +231,6 @@ div.rec_comment{
     flex-direction: column;
 }
 .about_container{
-    /*background-image: url(/pictures/rome_about.jpg);*/
     padding: 2em;
     font-weight: 900px;
     text-align: center;
@@ -211,11 +258,6 @@ div.rec_comment{
     margin: 4em;
 }
 
-@media  only screen and  (max-width: 575.98px) {
-    .container{
-        width: 90%;
-    }
-}
 
 
 /*Footer*/

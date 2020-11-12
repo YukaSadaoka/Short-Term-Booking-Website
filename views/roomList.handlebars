@@ -1,5 +1,5 @@
-<main>
-    <section class="jumbotron text-center" style="max-height:400px; margin-bottom:0;">
+<main >
+    <div class="text-center to_justify_center container" >
         <h1 class="room_header" >Explore Rooms</h1>
             <div><h2>Where Would You Like to Go?</h2></div>
                 <form method="POST" action="/contents/searchByCity" >
@@ -9,34 +9,33 @@
                                 <option selected disabled value="">Select a City</option>
                                 <option value="Toronto">Toronto</option>
                                 <option value="New York">New York</option>
-                                <optnoteion value="Italy">Italy</option>
+                                <option value="Italy">Italy</option>
                                 <option value="Tokyo">Tokyo</option>
                             </select>
                         </div>   
                     </div>
                     <div><input type="submit" value="See Rooms" class="btn_signup"></div>                 
                 </form>
-    </section>
+    </div>
     <div class="roomlist_location_container">
         <div class="roomlist_location">
             <h2>{{location}}</h2>
         </div>
     </div>
-    <div class="roomlist_container">
-        <div  class="row row-cols-1 row-cols-md-3">
+    <div  class="container-fluid">
+    <div class="roomlist_container to_justify_center">
+        <div class=" max_width_100 to_justify_center row_for_tablet card-deck">
             {{#if lists}}   
             {{#each lists}}
-                    <div class="col mb-4" class="card-deck">
-                        <div class="card" style="width: 20rem;">
+                    <div class="col-md-4  card_for_tablet card_for_roomList">
                             <a href="/user/bookroom/{{this._id}}" class="roomlist_link">
-                            <div class="card h-100">
+                            <div class="card ">
                                 <img class="card-img-top" src="{{this.photo}}" alt="room picture">
                                 <div class="card-body">
                                 <h5 class="card-title">{{this.title}}</h5>
                                 <div "card-text">From ${{this.price}} / night</div>
                                 <span "card-text">4.08(530) </span ><i class = "fas fa-star"></i>
                                 <p class="card-text"><small class="text-muted"></small></p>
-                            </div>
                             </div>
                             </a>
                         </div>
@@ -48,6 +47,7 @@
                 </div>
             {{/if}}
         </div>
+    </div>
     </div>
 </main>
 
